@@ -1,19 +1,71 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #080810;
-  --surface: #0f0f1a;
-  --surface2: #16162a;
+  --bg: #07070f;
+  --surface: #0d0d18;
+  --surface2: #14142200;
+  --surface2s: #141422;
+  --surface3: #1c1c2e;
   --border: rgba(255,255,255,0.07);
-  --orange: #f97316;
-  --orange-dim: rgba(249,115,22,0.12);
-  --orange-glow: rgba(249,115,22,0.25);
-  --green: #22c55e;
-  --muted: #6b6b8a;
+  --border-strong: rgba(255,255,255,0.15);
+  --orange: #ff5500;
+  --orange-dim: rgba(255,85,0,0.1);
+  --orange-glow: rgba(255,85,0,0.22);
+  --orange-text: #ff7733;
+  --green: #00d68f;
+  --green-dim: rgba(0,214,143,0.1);
+  --muted: #52526e;
+  --muted2: #9090ae;
+  --text: #ededff;
 }
 
 body {
   background: var(--bg);
-  color: #f0eeff;
-  font-family: var(--font-dm), 'DM Sans', sans-serif;
+  color: var(--text);
+  font-family: var(--font-dm), sans-serif;
+}
+
+/* ── Animations ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes float {
+  0%,100% { transform: translateY(0px) rotate(-1deg); }
+  50%     { transform: translateY(-10px) rotate(1deg); }
+}
+@keyframes pulse-dot {
+  0%,100% { opacity: 0.6; transform: scale(1); }
+  50%     { opacity: 1; transform: scale(1.2); }
+}
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(40px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes shimmer-line {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+.afu   { animation: fadeInUp 0.65s cubic-bezier(0.16,1,0.3,1) both; }
+.afu-1 { animation: fadeInUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.08s both; }
+.afu-2 { animation: fadeInUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.16s both; }
+.afu-3 { animation: fadeInUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.24s both; }
+.afu-4 { animation: fadeInUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.34s both; }
+.afu-5 { animation: fadeInUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.44s both; }
+.afi   { animation: fadeIn 0.5s ease both; }
+.a-float { animation: float 5s ease-in-out infinite; }
+
+.card-enter-1 { animation: card-in 0.7s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
+.card-enter-2 { animation: card-in 0.7s cubic-bezier(0.16,1,0.3,1) 0.22s both; }
+.card-enter-3 { animation: card-in 0.7s cubic-bezier(0.16,1,0.3,1) 0.34s both; }
+
+/* ── Dot grid background ── */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
 }

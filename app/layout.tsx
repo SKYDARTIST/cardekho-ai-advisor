@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
-import { Syne } from 'next/font/google'
-import { DM_Sans } from 'next/font/google'
+import { Syne, DM_Sans, Barlow_Condensed } from 'next/font/google'
 import './globals.css'
 
 const syne = Syne({
@@ -15,6 +14,12 @@ const dmSans = DM_Sans({
   weight: ['300', '400', '500'],
 })
 
+const barlowCondensed = Barlow_Condensed({
+  subsets: ['latin'],
+  variable: '--font-barlow',
+  weight: ['700', '800', '900'],
+})
+
 export const metadata: Metadata = {
   title: 'CarMatch AI — Find Your Perfect Car',
   description: 'Answer 4 lifestyle questions. Get 3 cars shortlisted by AI. No spec-sheet required.',
@@ -22,7 +27,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${syne.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${syne.variable} ${dmSans.variable} ${barlowCondensed.variable}`}>
       <body className="antialiased">{children}</body>
     </html>
   )

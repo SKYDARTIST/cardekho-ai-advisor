@@ -6,18 +6,18 @@ import { WizardAnswers, RecommendResponse } from '@/types'
 import CarCard from '@/components/CarCard'
 
 function ResultsContent() {
-  const params = useSearchParams()
-  const router = useRouter()
-  const [data, setData] = useState<RecommendResponse | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const params   = useSearchParams()
+  const router   = useRouter()
+  const [data, setData]       = useState<RecommendResponse | null>(null)
+  const [error, setError]     = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [loadingMsg, setLoadingMsg] = useState(0)
 
   const answers: WizardAnswers = {
-    drive: params.get('drive') as WizardAnswers['drive'],
+    drive:      params.get('drive')      as WizardAnswers['drive'],
     passengers: params.get('passengers') as WizardAnswers['passengers'],
-    vibe: params.get('vibe') as WizardAnswers['vibe'],
-    budget: params.get('budget') as WizardAnswers['budget'],
+    vibe:       params.get('vibe')       as WizardAnswers['vibe'],
+    budget:     params.get('budget')     as WizardAnswers['budget'],
   }
 
   useEffect(() => {
@@ -25,12 +25,7 @@ function ResultsContent() {
       router.push('/')
       return
     }
-
-    // Cycle loading messages
-    const msgInterval = setInterval(() => {
-      setLoadingMsg(m => (m + 1) % 3)
-    }, 1200)
-
+    const msgInterval = setInterval(() => setLoadingMsg(m => (m + 1) % 3), 1200)
     fetch('/api/recommend', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -42,11 +37,7 @@ function ResultsContent() {
         setData(d)
       })
       .catch(e => setError(e.message))
-      .finally(() => {
-        clearInterval(msgInterval)
-        setLoading(false)
-      })
-
+      .finally(() => { clearInterval(msgInterval); setLoading(false) })
     return () => clearInterval(msgInterval)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -59,20 +50,29 @@ function ResultsContent() {
 
   if (loading) {
     return (
-      <div
-        className="min-h-screen flex flex-col items-center justify-center gap-6"
-        style={{ background: 'var(--bg)' }}
-      >
-        <div
-          className="w-10 h-10 rounded-full border-2 border-t-transparent animate-spin"
-          style={{ borderColor: 'var(--orange)', borderTopColor: 'transparent' }}
-        />
+      <div className="min-h-screen flex flex-col items-center justify-center gap-8" style={{ background: 'var(--bg)' }}>
+        <div className="relative">
+          <div
+            className="w-16 h-16 rounded-full border-2 animate-spin"
+            style={{ borderColor: 'rgba(255,85,0,0.2)', borderTopColor: 'var(--orange)' }}
+          />
+          <div
+            className="absolute inset-0 rounded-full"
+            style={{ background: 'radial-gradient(circle, rgba(255,85,0,0.1) 0%, transparent 70%)' }}
+          />
+        </div>
         <div className="text-center space-y-2">
           {loadingMessages.map((msg, i) => (
             <p
               key={i}
               className="text-sm transition-all duration-500"
-              style={{ color: i === loadingMsg ? 'var(--orange)' : 'var(--muted)' }}
+              style={{
+                color: i === loadingMsg ? 'var(--orange-text)' : 'var(--muted)',
+                opacity: i === loadingMsg ? 1 : 0.4,
+                transform: i === loadingMsg ? 'scale(1.05)' : 'scale(1)',
+                fontFamily: i === loadingMsg ? 'var(--font-syne)' : 'inherit',
+                fontWeight: i === loadingMsg ? 600 : 400,
+              }}
             >
               {msg}
             </p>
@@ -84,17 +84,10 @@ function ResultsContent() {
 
   if (error) {
     return (
-      <div
-        className="min-h-screen flex items-center justify-center"
-        style={{ background: 'var(--bg)' }}
-      >
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg)' }}>
         <div className="text-center">
-          <p className="mb-4" style={{ color: 'var(--muted)' }}>Something went wrong: {error}</p>
-          <button
-            onClick={() => router.push('/')}
-            className="text-sm underline"
-            style={{ color: 'var(--orange)' }}
-          >
+          <p className="mb-4 text-sm" style={{ color: 'var(--muted2)' }}>Something went wrong: {error}</p>
+          <button onClick={() => router.push('/')} className="text-sm font-medium" style={{ color: 'var(--orange-text)' }}>
             ← Start over
           </button>
         </div>
@@ -104,82 +97,117 @@ function ResultsContent() {
 
   return (
     <main className="min-h-screen" style={{ background: 'var(--bg)' }}>
+
       {/* NAV */}
       <nav
-        className="flex items-center justify-between px-10 py-5 sticky top-0 backdrop-blur-md"
-        style={{ borderBottom: '1px solid var(--border)', background: 'rgba(8,8,16,0.9)' }}
+        className="flex items-center justify-between px-8 md:px-12 py-5 sticky top-0 z-50 backdrop-blur-xl"
+        style={{ borderBottom: '1px solid var(--border)', background: 'rgba(7,7,15,0.85)' }}
       >
-        <div
-          className="font-extrabold text-lg flex items-center gap-2"
-          style={{ fontFamily: 'var(--font-syne)' }}
-        >
-          <span
-            className="w-2 h-2 rounded-full"
-            style={{ background: 'var(--orange)', boxShadow: '0 0 10px #f97316' }}
-          />
+        <div className="font-extrabold text-base flex items-center gap-2.5" style={{ fontFamily: 'var(--font-syne)' }}>
+          <span className="w-2 h-2 rounded-full" style={{ background: 'var(--orange)', boxShadow: '0 0 12px var(--orange)' }} />
           Car<span style={{ color: 'var(--orange)' }}>Match</span> AI
         </div>
         <button
           onClick={() => router.push('/')}
-          className="text-xs transition-colors hover:text-white"
-          style={{ color: 'var(--muted)' }}
+          className="text-xs font-medium transition-colors hover:text-white"
+          style={{ color: 'var(--muted)', fontFamily: 'var(--font-syne)' }}
         >
-          ← Start over
+          ← New search
         </button>
       </nav>
 
-      <div className="max-w-5xl mx-auto px-8 py-16">
-        {/* Header */}
-        <div className="mb-12">
-          <p
-            className="text-xs uppercase tracking-widest flex items-center gap-2 mb-3"
-            style={{ color: 'var(--green)' }}
-          >
-            <span className="w-4 h-px" style={{ background: 'var(--green)' }} />
-            AI Shortlist Ready
-          </p>
-          <h1
-            className="font-extrabold text-4xl mb-2"
-            style={{ fontFamily: 'var(--font-syne)' }}
-          >
-            Your top 3 matches
-          </h1>
-          {data?.summaryLine && (
-            <p className="text-sm font-light" style={{ color: 'var(--muted)' }}>
-              {data.summaryLine}
-            </p>
-          )}
-        </div>
+      {/* HEADER */}
+      <div className="relative overflow-hidden">
+        {/* Dot grid */}
+        <div className="absolute inset-0 dot-grid opacity-100 pointer-events-none" />
+        {/* Spotlight */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 50% 80% at 50% 0%, rgba(255,85,0,0.06) 0%, transparent 70%)' }}
+        />
 
-        {/* Car cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
-          {data?.recommendations.map((rec) => (
-            <CarCard key={rec.car.id} rec={rec} />
+        <div className="relative max-w-7xl mx-auto px-8 md:px-12 pt-16 pb-14">
+          <div className="afu flex items-center gap-3 mb-5">
+            <span
+              className="w-2 h-2 rounded-full"
+              style={{ background: 'var(--green)', boxShadow: '0 0 10px var(--green)' }}
+            />
+            <p className="text-[10px] uppercase tracking-[0.2em]" style={{ color: 'var(--green)' }}>
+              AI Shortlist Ready
+            </p>
+          </div>
+
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <h1
+              className="afu-1 font-black leading-[0.9]"
+              style={{
+                fontFamily: 'var(--font-barlow)',
+                fontSize: 'clamp(52px, 7vw, 96px)',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              YOUR TOP 3
+              <br />
+              <span style={{ color: 'var(--orange-text)' }}>MATCHES</span>
+            </h1>
+
+            {data?.summaryLine && (
+              <p
+                className="afu-2 text-sm font-light max-w-sm leading-relaxed text-right"
+                style={{ color: 'var(--muted2)' }}
+              >
+                {data.summaryLine}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* CAR CARDS */}
+      <div className="max-w-7xl mx-auto px-8 md:px-12 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {data?.recommendations.map((rec, i) => (
+            <CarCard
+              key={rec.car.id}
+              rec={rec}
+              enterClass={['card-enter-1', 'card-enter-2', 'card-enter-3'][i]}
+            />
           ))}
         </div>
 
-        {/* AI reasoning strip */}
+        {/* AI Reasoning strip */}
         <div
-          className="rounded-2xl p-5 flex items-start gap-4"
-          style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+          className="afu-4 mt-10 rounded-2xl p-6 flex items-start gap-5"
+          style={{
+            background: 'var(--surface)',
+            border: '1px solid var(--border)',
+          }}
         >
           <div
-            className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-base"
+            className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-lg"
             style={{
               background: 'var(--orange-dim)',
-              border: '1px solid rgba(249,115,22,0.25)',
+              border: '1px solid rgba(255,85,0,0.25)',
             }}
           >
             🤖
           </div>
-          <div className="text-sm leading-relaxed" style={{ color: '#a0a0c0' }}>
-            <strong style={{ color: '#f0eeff', fontWeight: 500 }}>How we chose these: </strong>
-            We filtered{' '}
-            <strong style={{ color: '#f0eeff', fontWeight: 500 }}>40+ Indian cars</strong> to your
-            budget, then used Gemini AI to rank by what matters to{' '}
-            <em>you</em> — not just specs. The emotional match on each card was written specifically
-            for your answers.{' '}
-            <span style={{ color: 'var(--orange)' }}>Not a generic result.</span>
+          <div>
+            <p
+              className="text-xs font-semibold uppercase tracking-widest mb-2"
+              style={{ color: 'var(--orange-text)', fontFamily: 'var(--font-syne)' }}
+            >
+              How we chose these
+            </p>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--muted2)' }}>
+              We filtered{' '}
+              <strong style={{ color: 'var(--text)', fontWeight: 500 }}>40+ Indian cars</strong>{' '}
+              to your budget, then used{' '}
+              <strong style={{ color: 'var(--text)', fontWeight: 500 }}>Gemini 2.5 Flash</strong>{' '}
+              to rank by what matters to <em>you</em> — not just specs. The emotional match on each
+              card was written specifically for your answers.{' '}
+              <span style={{ color: 'var(--orange-text)' }}>Not a generic result.</span>
+            </p>
           </div>
         </div>
       </div>
@@ -191,13 +219,10 @@ export default function ResultsPage() {
   return (
     <Suspense
       fallback={
-        <div
-          className="min-h-screen flex items-center justify-center"
-          style={{ background: 'var(--bg)' }}
-        >
+        <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg)' }}>
           <div
-            className="w-10 h-10 rounded-full border-2 border-t-transparent animate-spin"
-            style={{ borderColor: 'var(--orange)', borderTopColor: 'transparent' }}
+            className="w-12 h-12 rounded-full border-2 animate-spin"
+            style={{ borderColor: 'rgba(255,85,0,0.2)', borderTopColor: 'var(--orange)' }}
           />
         </div>
       }
