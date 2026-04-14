@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CarMatch AI — Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080810;
+    --surface: #0f0f1a;
+    --surface2: #16162a;
+    --border: rgba(255,255,255,0.07);
+    --orange: #f97316;
+    --orange-dim: rgba(249,115,22,0.12);
+    --orange-glow: rgba(249,115,22,0.25);
+    --green: #22c55e;
+    --text: #f0eeff;
+    --muted: #6b6b8a;
+    --accent: #7c6af7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 40px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(8,8,16,0.92);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .logo span { color: var(--orange); }
+  .logo-dot {
+    width: 8px; height: 8px;
+    background: var(--orange);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--orange);
+  }
+
+  .nav-tag {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 100px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding: 80px 40px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-label::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--orange);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--orange);
+  }
+
+  .hero-sub {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 36px;
+    font-weight: 300;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--orange);
+    color: #000;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    padding: 16px 28px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px var(--orange-glow); }
+  .cta-btn svg { transition: transform 0.2s; }
+  .cta-btn:hover svg { transform: translateX(4px); }
+
+  .stats-row {
+    display: flex;
+    gap: 28px;
+    margin-top: 40px;
+  }
+  .stat { }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* hero car visual */
+  .hero-visual {
+    position: relative;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .car-glow {
+    position: absolute;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(249,115,22,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .car-silhouette {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
+  }
+  /* SVG car drawn in CSS */
+
+  /* ─── DIVIDER ─── */
+  .section-divider {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .section-divider::before, .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .section-divider span {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ─── WIZARD ─── */
+  .wizard-section {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  .wizard-progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+  .step {
+    flex: 1;
+    height: 3px;
+    border-radius: 100px;
+    background: var(--surface2);
+    transition: background 0.3s;
+  }
+  .step.done { background: var(--orange); }
+  .step.active { background: var(--orange); opacity: 0.5; }
+
+  .step-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .step-label strong { color: var(--orange); }
+
+  .question-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .question-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .opt-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .opt-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--orange-dim);
+    opacity: 0;
+    transition: opacity 0.2s;
+    border-radius: inherit;
+  }
+  .opt-card:hover { border-color: rgba(249,115,22,0.4); transform: translateY(-2px); }
+  .opt-card:hover::before { opacity: 1; }
+  .opt-card.selected {
+    border-color: var(--orange);
+    background: var(--surface2);
+  }
+  .opt-card.selected::before { opacity: 1; }
+
+  .opt-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .opt-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .opt-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .opt-check {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 10px;
+  }
+  .opt-card.selected .opt-check { opacity: 1; }
+
+  .wizard-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .back-btn {
+    font-size: 13px;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .next-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--orange);
+    color: #000;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 13px 24px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── RESULTS ─── */
+  .results-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  .results-header {
+    margin-bottom: 36px;
+  }
+  .results-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .results-label::before {
+    content: '';
+    width: 16px; height: 1px;
+    background: var(--green);
+  }
+  .results-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+  }
+  .results-sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 6px;
+    font-weight: 300;
+  }
+
+  .car-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .car-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .car-card:hover {
+    border-color: rgba(249,115,22,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+  .car-card.top-pick {
+    border-color: var(--orange);
+  }
+
+  .top-pick-badge {
+    position: absolute;
+    top: 14px; left: 14px;
+    background: var(--orange);
+    color: #000;
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    z-index: 2;
+  }
+
+  .car-image-area {
+    height: 160px;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .car-image-area::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40px;
+    background: linear-gradient(to top, var(--surface), transparent);
+  }
+  .car-emoji {
+    font-size: 72px;
+    filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5));
+  }
+  .car-glow-bg {
+    position: absolute;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, rgba(249,115,22,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .car-body {
+    padding: 18px 20px 20px;
+  }
+  .car-make {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .car-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .car-price {
+    font-size: 14px;
+    color: var(--orange);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+
+  .car-reason {
+    background: var(--surface2);
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 12px;
+    color: #a0a0c0;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    border-left: 2px solid var(--orange);
+    font-style: italic;
+  }
+
+  .car-specs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .spec-tag {
+    font-size: 11px;
+    background: var(--surface2);
+    color: var(--muted);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .view-btn {
+    width: 100%;
+    padding: 11px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .view-btn:hover {
+    background: var(--surface2);
+    border-color: var(--orange);
+    color: var(--orange);
+  }
+
+  /* ─── AI REASONING STRIP ─── */
+  .ai-strip {
+    max-width: 1100px;
+    margin: 0 auto 60px;
+    padding: 0 40px;
+  }
+  .ai-reasoning {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .ai-icon {
+    width: 36px; height: 36px;
+    background: var(--orange-dim);
+    border: 1px solid var(--orange-glow);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .ai-text {
+    font-size: 13px;
+    color: #a0a0c0;
+    line-height: 1.7;
+  }
+  .ai-text strong { color: var(--text); font-weight: 500; }
+
+  /* ─── SCREEN LABEL ─── */
+  .screen-label {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 10px 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .screen-label::before, .screen-label::after {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--border);
+  }
+
+  /* JS interactivity */
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    Car<span>Match</span> AI
+  </div>
+  <div class="nav-tag">by CarDekho</div>
+</nav>
+
+<!-- ════ SCREEN 1 — HERO ════ -->
+<div class="screen-label">Screen 1 — Landing</div>
+
+<section class="hero">
+  <div>
+    <div class="hero-label">AI-Powered Car Advisor</div>
+    <h1>Find your car.<br>Not just <em>a</em> car.</h1>
+    <p class="hero-sub">
+      Answer 4 quick questions about your life — not your specs —
+      and we'll shortlist the 3 cars built for how you actually drive.
+    </p>
+    <button class="cta-btn">
+      Start Matching
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-num">40+</div>
+        <div class="stat-label">Cars in dataset</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Questions only</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Shortlisted picks</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="car-glow"></div>
+    <svg viewBox="0 0 500 240" fill="none" xmlns="http://www.w3.org/2000/svg" class="car-silhouette">
+      <!-- Car body -->
+      <rect x="40" y="140" width="420" height="60" rx="12" fill="#16162a"/>
+      <!-- Cabin -->
+      <path d="M140 140 C150 100 180 80 220 75 L300 75 C340 75 360 95 370 140 Z" fill="#1e1e35"/>
+      <!-- Windows -->
+      <path d="M155 138 C162 110 180 92 210 88 L240 88 L240 138 Z" fill="#0a0a20" opacity="0.8"/>
+      <path d="M260 88 L290 88 C318 92 332 110 340 138 L260 138 Z" fill="#0a0a20" opacity="0.8"/>
+      <line x1="250" y1="88" x2="250" y2="138" stroke="#16162a" stroke-width="4"/>
+      <!-- Front lights -->
+      <rect x="42" y="152" width="40" height="14" rx="4" fill="#f97316" opacity="0.6"/>
+      <rect x="44" y="154" width="20" height="10" rx="3" fill="#f97316"/>
+      <!-- Rear lights -->
+      <rect x="418" y="152" width="40" height="14" rx="4" fill="#ef4444" opacity="0.6"/>
+      <rect x="436" y="154" width="20" height="10" rx="3" fill="#ef4444"/>
+      <!-- Wheels -->
+      <circle cx="130" cy="200" r="38" fill="#0f0f1a" stroke="#2a2a45" stroke-width="3"/>
+      <circle cx="130" cy="200" r="24" fill="#16162a"/>
+      <circle cx="130" cy="200" r="8" fill="#f97316" opacity="0.7"/>
+      <circle cx="370" cy="200" r="38" fill="#0f0f1a" stroke="#2a2a45" stroke-width="3"/>
+      <circle cx="370" cy="200" r="24" fill="#16162a"/>
+      <circle cx="370" cy="200" r="8" fill="#f97316" opacity="0.7"/>
+      <!-- Ground shadow -->
+      <ellipse cx="250" cy="238" rx="200" ry="8" fill="rgba(0,0,0,0.3)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ════ SCREEN 2 — WIZARD Q2 ════ -->
+<div class="section-divider"><span>Question Flow</span></div>
+<div class="screen-label">Screen 2 — Wizard (Question 2 of 4)</div>
+
+<section class="wizard-section">
+  <div class="wizard-progress">
+    <div class="step done"></div>
+    <div class="step active"></div>
+    <div class="step"></div>
+    <div class="step"></div>
+  </div>
+  <div class="step-label">Step <strong>2</strong> of 4</div>
+  <h2 class="question-text">Who's usually riding with you?</h2>
+  <p class="question-sub">This helps us get the right space and safety setup.</p>
+
+  <div class="options-grid">
+    <div class="opt-card" onclick="toggleOpt(this)">
+      <div class="opt-check">✓</div>
+      <span class="opt-icon">🧑</span>
+      <div class="opt-title">Just me</div>
+      <div class="opt-desc">Solo driver. I want it quick and efficient.</div>
+    </div>
+    <div class="opt-card selected" onclick="toggleOpt(this)">
+      <div class="opt-check">✓</div>
+      <span class="opt-icon">👨‍👩‍👧‍👦</span>
+      <div class="opt-title">Full family</div>
+      <div class="opt-desc">Kids in the back, bags in the boot, always.</div>
+    </div>
+    <div class="opt-card" onclick="toggleOpt(this)">
+      <div class="opt-check">✓</div>
+      <span class="opt-icon">👫</span>
+      <div class="opt-title">Me + partner</div>
+      <div class="opt-desc">Two of us. Comfort and style matter.</div>
+    </div>
+    <div class="opt-card" onclick="toggleOpt(this)">
+      <div class="opt-check">✓</div>
+      <span class="opt-icon">🐕</span>
+      <div class="opt-title">Me + pets</div>
+      <div class="opt-desc">Space and easy cleaning. A must.</div>
+    </div>
+  </div>
+
+  <div class="wizard-nav">
+    <button class="back-btn">← Back</button>
+    <button class="next-btn">
+      Continue →
+    </button>
+  </div>
+</section>
+
+<!-- ════ SCREEN 3 — RESULTS ════ -->
+<div class="section-divider"><span>Results</span></div>
+<div class="screen-label">Screen 3 — Your Shortlist</div>
+
+<section class="results-section">
+  <div class="results-header">
+    <div class="results-label">AI Shortlist Ready</div>
+    <h2 class="results-title">Your top 3 matches</h2>
+    <p class="results-sub">Based on your lifestyle — family, city + highway, comfort, ₹10–15L budget</p>
+  </div>
+
+  <div class="car-cards">
+    <!-- Car 1 — Top Pick -->
+    <div class="car-card top-pick">
+      <div class="top-pick-badge">★ Best Match</div>
+      <div class="car-image-area">
+        <div class="car-glow-bg"></div>
+        <div class="car-emoji">🚙</div>
+      </div>
+      <div class="car-body">
+        <div class="car-make">Tata</div>
+        <div class="car-name">Nexon</div>
+        <div class="car-price">₹8.1L – ₹15.5L</div>
+        <div class="car-reason">"Best 5-star safety for families in this range. Big boot, easy city maneuverability."</div>
+        <div class="car-specs">
+          <span class="spec-tag">5★ Safety</span>
+          <span class="spec-tag">17 kmpl</span>
+          <span class="spec-tag">350L Boot</span>
+          <span class="spec-tag">Petrol/EV</span>
+        </div>
+        <button class="view-btn">View Details →</button>
+      </div>
+    </div>
+
+    <!-- Car 2 -->
+    <div class="car-card">
+      <div class="car-image-area">
+        <div class="car-glow-bg"></div>
+        <div class="car-emoji">🚗</div>
+      </div>
+      <div class="car-body">
+        <div class="car-make">Hyundai</div>
+        <div class="car-name">Creta</div>
+        <div class="car-price">₹11L – ₹20L</div>
+        <div class="car-reason">"Highway comfort is hard to beat. Spacious rear seat, premium feel without premium price."</div>
+        <div class="car-specs">
+          <span class="spec-tag">4★ Safety</span>
+          <span class="spec-tag">16.8 kmpl</span>
+          <span class="spec-tag">433L Boot</span>
+          <span class="spec-tag">Petrol/Diesel</span>
+        </div>
+        <button class="view-btn">View Details →</button>
+      </div>
+    </div>
+
+    <!-- Car 3 -->
+    <div class="car-card">
+      <div class="car-image-area">
+        <div class="car-glow-bg"></div>
+        <div class="car-emoji">🚘</div>
+      </div>
+      <div class="car-body">
+        <div class="car-make">Maruti Suzuki</div>
+        <div class="car-name">Grand Vitara</div>
+        <div class="car-price">₹10.7L – ₹19.9L</div>
+        <div class="car-reason">"Hybrid saves fuel on your daily city commute. Smooth ride, kids will sleep through it."</div>
+        <div class="car-specs">
+          <span class="spec-tag">3★ Safety</span>
+          <span class="spec-tag">27.97 kmpl</span>
+          <span class="spec-tag">373L Boot</span>
+          <span class="spec-tag">Hybrid</span>
+        </div>
+        <button class="view-btn">View Details →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI Reasoning Strip -->
+<div class="ai-strip">
+  <div class="ai-reasoning">
+    <div class="ai-icon">🤖</div>
+    <div class="ai-text">
+      <strong>Why these 3?</strong> You told me: city + highway driving, full family, comfort matters, ₹10–15L budget.
+      I filtered the dataset to 40+ cars, then asked Gemini to rank by family safety, boot space, and fuel economy
+      in your price band. The Nexon wins on safety. The Creta wins on comfort. The Grand Vitara wins on long-term fuel savings.
+      <strong>All three are worth a test drive.</strong>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleOpt(el) {
+    const parent = el.closest('.options-grid');
+    parent.querySelectorAll('.opt-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+</script>
+</body>
+</html>
