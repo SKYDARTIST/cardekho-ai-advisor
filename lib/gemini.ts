@@ -59,6 +59,7 @@ INSTRUCTIONS:
 3. For each car assign a "matchScore" (0-100) representing how well it fits this buyer. #1 pick should score 85-98, #2 pick 70-84, #3 pick 55-72. Be precise — don't round to 5s.
 4. For each car write an "emotionalHook" — 1-2 sentences that connect the car to THIS BUYER'S SPECIFIC LIFE. Reference their drive pattern, passengers, or vibe. Sound like a knowledgeable friend, not a salesperson.
 5. Give 2-3 matchReasons as short factual bullet points (e.g., "Best-in-class 5★ NCAP safety", "350L boot fits stroller + groceries")
+6. Write "whyTopPick" — ONE sentence explaining specifically why car #1 beats car #2 for THIS buyer. Name both cars. Be direct, not generic. (e.g., "The Nexon's 5-star NCAP edges out the Venue's 3-star rating — critical when your family is on board.")
 
 RESPOND WITH VALID JSON ONLY. No markdown, no explanation, no code fences. Raw JSON only. Format:
 {
@@ -71,7 +72,8 @@ RESPOND WITH VALID JSON ONLY. No markdown, no explanation, no code fences. Raw J
       "matchReasons": ["...", "...", "..."]
     }
   ],
-  "summaryLine": "Based on your lifestyle: [brief description of buyer profile]"
+  "summaryLine": "Based on your lifestyle: [brief description of buyer profile]",
+  "whyTopPick": "The [car #1] beats the [car #2] for your profile because..."
 }`
 }
 
@@ -108,5 +110,6 @@ export async function getRecommendations(answers: WizardAnswers): Promise<Recomm
   return {
     recommendations: recommendations.sort((a, b) => a.rank - b.rank),
     summaryLine: parsed.summaryLine,
+    whyTopPick: parsed.whyTopPick ?? '',
   }
 }

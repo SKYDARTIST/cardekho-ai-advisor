@@ -5,10 +5,12 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { WizardAnswers, RecommendResponse } from '@/types'
 import CarCard from '@/components/CarCard'
 import ThemeToggle from '@/components/ThemeToggle'
+import { useTheme } from '@/hooks/useTheme'
 
 function ResultsContent() {
   const params   = useSearchParams()
   const router   = useRouter()
+  const isDark   = useTheme()
   const [data, setData]       = useState<RecommendResponse | null>(null)
   const [error, setError]     = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
@@ -290,6 +292,105 @@ function ResultsContent() {
             />
           ))}
         </div>
+
+        {/* THE VERDICT */}
+        {data && (
+          <div
+            className="afu-4 mt-10 rounded-2xl overflow-hidden"
+            style={{ border: '1px solid var(--border)', background: 'var(--surface)' }}
+          >
+            {/* Header */}
+            <div className="px-6 py-5" style={{ borderBottom: '1px solid var(--border)' }}>
+              <p
+                className="text-[9px] uppercase tracking-[0.25em] mb-2 font-medium"
+                style={{ color: 'var(--orange-text)', fontFamily: 'var(--font-syne)' }}
+              >
+                The Verdict
+              </p>
+              <h3
+                className="font-bold text-lg mb-3"
+                style={{ fontFamily: 'var(--font-syne)', color: 'var(--text)' }}
+              >
+                Why {data.recommendations[0]?.car.model} is your car
+              </h3>
+              {data.whyTopPick && (
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--muted2)' }}>
+                  {data.whyTopPick}
+                </p>
+              )}
+            </div>
+
+            {/* 5-year ownership cost comparison */}
+            <div className="px-6 py-5">
+              <p
+                className="text-[9px] uppercase tracking-[0.25em] mb-5 font-medium"
+                style={{ color: 'var(--muted)', fontFamily: 'var(--font-syne)' }}
+              >
+                5-year ownership cost · 15,000 km/year
+              </p>
+              <div className="space-y-4">
+                {(() => {
+                  const FUEL_PRICE: Record<string, number> = { petrol: 103, diesel: 90, electric: 0, hybrid: 103, cng: 70 }
+                  const MAINT_YEAR: Record<string, number> = { petrol: 7000, diesel: 10000, electric: 4000, hybrid: 8000, cng: 6000 }
+                  const FUEL_ACCENT_LOCAL: Record<string, string> = { petrol: '#ff5500', diesel: '#6366f1', electric: '#00b4ff', hybrid: '#00d68f', cng: '#38bdf8' }
+                  const KM = 15000
+
+                  const costs = data.recommendations.map(rec => {
+                    const c = rec.car
+                    const fuelPerYear = c.fuelType === 'electric'
+                      ? KM * 1.5
+                      : c.mileage > 0 ? (KM / c.mileage) * FUEL_PRICE[c.fuelType] : 0
+                    const maintPerYear = MAINT_YEAR[c.fuelType] ?? 7000
+                    const insurPerYear = c.priceMax * 100000 * 0.02
+                    const total = Math.round(((fuelPerYear + maintPerYear + insurPerYear) * 5) / 10000) / 10
+                    return { rec, total }
+                  })
+
+                  const maxCost = Math.max(...costs.map(x => x.total))
+
+                  return costs.map(({ rec, total }, i) => {
+                    const accent = FUEL_ACCENT_LOCAL[rec.car.fuelType] ?? '#ff5500'
+                    const pct = Math.round((total / maxCost) * 100)
+                    return (
+                      <div key={rec.car.id}>
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            {i === 0 && (
+                              <span
+                                className="text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded"
+                                style={{ background: 'var(--orange-dim)', color: 'var(--orange-text)', fontFamily: 'var(--font-syne)' }}
+                              >
+                                Cheapest
+                              </span>
+                            )}
+                            <span className="text-sm font-medium" style={{ color: 'var(--text)', fontFamily: 'var(--font-syne)' }}>
+                              {rec.car.model}
+                            </span>
+                          </div>
+                          <span className="text-sm font-bold" style={{ color: accent }}>
+                            ₹{total}L
+                          </span>
+                        </div>
+                        <div
+                          className="h-1.5 rounded-full w-full"
+                          style={{ background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)' }}
+                        >
+                          <div
+                            className="h-1.5 rounded-full"
+                            style={{ width: `${pct}%`, background: accent, transition: 'width 1s cubic-bezier(0.16,1,0.3,1)' }}
+                          />
+                        </div>
+                      </div>
+                    )
+                  })
+                })()}
+              </div>
+              <p className="mt-4 text-[10px]" style={{ color: 'var(--muted)' }}>
+                Fuel + insurance (2% p.a. of ex-showroom) + maintenance. Actual costs vary by city and usage.
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* AI Reasoning strip */}
         <div

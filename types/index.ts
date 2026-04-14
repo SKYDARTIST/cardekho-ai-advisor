@@ -47,4 +47,5 @@ export interface CarRecommendation {
 export interface RecommendResponse {
   recommendations: CarRecommendation[]
   summaryLine: string
+  whyTopPick: string  // one sentence: why #1 beats #2 for this buyer
 }

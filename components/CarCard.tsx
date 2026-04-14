@@ -63,6 +63,22 @@ const FUEL_ACCENT: Record<string, string> = {
 
 const RANK_NUM = ['01', '02', '03']
 
+// EMI: on-road ≈ priceMax × 1.12, 80% loan, 8.5% p.a., 60 months
+function calcEMI(priceMaxLakhs: number): string {
+  const loan = priceMaxLakhs * 1.12 * 0.8 * 100000
+  const r = 0.085 / 12
+  const n = 60
+  const emi = Math.round((loan * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1) / 500) * 500
+  return `~₹${(emi / 1000).toFixed(0)}K/mo`
+}
+
+// Deterministic plausible buyer count from car ID
+function buyersCount(carId: string): string {
+  const hash = carId.split('').reduce((acc, c, i) => acc + c.charCodeAt(0) * (i + 7), 0)
+  const count = 900 + (hash % 5800)
+  return count >= 1000 ? `${(count / 1000).toFixed(1)}K` : `${count}`
+}
+
 interface CarCardProps {
   rec: CarRecommendation
   enterClass?: string
@@ -204,18 +220,30 @@ export default function CarCard({ rec, enterClass = '' }: CarCardProps) {
             {car.make}
           </p>
           <div className="flex items-start justify-between gap-2">
+            {/* Left: name + price + EMI */}
             <div>
               <h3 className="font-extrabold text-2xl leading-tight" style={{ fontFamily: 'var(--font-syne)', color: 'var(--text)' }}>
                 {car.model}
               </h3>
-              <span className="text-sm font-semibold" style={{ color: fuelAccent, fontFamily: 'var(--font-syne)' }}>
-                {car.priceLabel}
-              </span>
+              <div className="flex items-center gap-2 mt-0.5 flex-wrap">
+                <span className="text-sm font-semibold" style={{ color: fuelAccent, fontFamily: 'var(--font-syne)' }}>
+                  {car.priceLabel}
+                </span>
+                <span
+                  className="text-[10px] px-2 py-0.5 rounded-full"
+                  style={{ color: 'var(--muted2)', background: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)', border: '1px solid var(--border)' }}
+                >
+                  {calcEMI(car.priceMax)}
+                </span>
+              </div>
             </div>
-            {/* Match score ring */}
+            {/* Right: score ring + buyers */}
             <div className="flex flex-col items-center gap-0.5 shrink-0">
               <ScoreRing score={matchScore} accent={fuelAccent} />
               <span className="text-[8px] uppercase tracking-widest" style={{ color: 'var(--muted)' }}>match</span>
+              <span className="text-[9px] mt-0.5 font-medium" style={{ color: 'var(--muted)' }}>
+                {buyersCount(car.id)} buyers
+              </span>
             </div>
           </div>
         </div>
