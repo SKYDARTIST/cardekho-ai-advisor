@@ -24,7 +24,7 @@ export default function Home() {
         className="flex items-center justify-between px-8 md:px-12 py-5 sticky top-0 z-50 backdrop-blur-xl"
         style={{ borderBottom: '1px solid var(--border)', background: 'var(--nav-bg)' }}
       >
-        <div className="font-extrabold text-base flex items-center gap-2.5" style={{ fontFamily: 'var(--font-syne)' }}>
+        <div className="font-extrabold text-base flex items-center gap-2.5" style={{ fontFamily: 'var(--font-syne)', color: 'var(--text)' }}>
           <span
             className="w-2 h-2 rounded-full"
             style={{ background: 'var(--orange)', boxShadow: '0 0 12px var(--orange)' }}
@@ -68,7 +68,7 @@ export default function Home() {
           }}
         />
 
-        {/* Horizontal speed lines */}
+        {/* Horizontal speed lines — span full width to connect columns */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {[15, 35, 55, 75].map((top, i) => (
             <div
@@ -76,12 +76,22 @@ export default function Home() {
               className="absolute h-px"
               style={{
                 top: `${top}%`,
+                left: '30%',
                 right: 0,
-                width: `${20 + i * 8}%`,
-                background: `linear-gradient(to right, transparent, rgba(255,85,0,${0.04 + i * 0.02}))`,
+                background: `linear-gradient(to right, transparent, rgba(255,85,0,${0.06 + i * 0.025}), transparent)`,
               }}
             />
           ))}
+          {/* Centre connecting line between columns */}
+          <div
+            className="absolute h-px hidden md:block"
+            style={{
+              top: '50%',
+              left: '42%',
+              width: '8%',
+              background: 'linear-gradient(to right, transparent, rgba(255,85,0,0.18), transparent)',
+            }}
+          />
         </div>
 
         <div className="relative w-full max-w-7xl mx-auto px-8 md:px-12 py-20 md:py-0">
@@ -145,7 +155,11 @@ export default function Home() {
                   </svg>
                 </button>
 
-                <span className="text-xs" style={{ color: 'var(--muted)' }}>
+                <span className="inline-flex items-center gap-1.5 text-xs" style={{ color: 'var(--muted2)' }}>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="1.2"/>
+                    <path d="M3.5 6l2 2 3-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
                   No account needed · 30 seconds
                 </span>
               </div>
@@ -168,7 +182,7 @@ export default function Home() {
                     >
                       {num}
                     </div>
-                    <div className="text-[11px] mt-2 uppercase tracking-widest" style={{ color: 'var(--muted)' }}>
+                    <div className="text-xs mt-2 uppercase tracking-widest font-medium" style={{ color: 'var(--muted2)' }}>
                       {label}
                     </div>
                   </div>
@@ -229,16 +243,16 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Floating spec chips */}
+              {/* Floating spec chips — staggered entrance */}
               {[
-                { label: '5★ NCAP', top: '10%', right: '5%', color: '#00d68f' },
-                { label: '27 kmpl', top: '75%', right: '0%', color: 'var(--orange-text)' },
-                { label: 'Gemini AI', top: '20%', left: '0%', color: '#a78bfa' },
-                { label: '40+ cars', top: '65%', left: '5%', color: 'var(--muted2)' },
-              ].map(({ label, top, right, left, color }: { label: string; top: string; right?: string; left?: string; color: string }) => (
+                { label: '5★ NCAP',  top: '10%', right: '5%',  color: '#00d68f',           cls: 'chip-in-1' },
+                { label: '27 kmpl',  top: '75%', right: '0%',  color: 'var(--orange-text)', cls: 'chip-in-2' },
+                { label: 'Gemini AI',top: '20%', left: '0%',   color: '#a78bfa',            cls: 'chip-in-3' },
+                { label: '40+ cars', top: '65%', left: '5%',   color: 'var(--muted2)',      cls: 'chip-in-4' },
+              ].map(({ label, top, right, left, color, cls }: { label: string; top: string; right?: string; left?: string; color: string; cls: string }) => (
                 <div
                   key={label}
-                  className="absolute text-[10px] font-semibold px-3 py-1.5 rounded-full tracking-wide"
+                  className={`absolute text-[10px] font-semibold px-3 py-1.5 rounded-full tracking-wide ${cls}`}
                   style={{
                     top, right, left,
                     color,
@@ -258,12 +272,24 @@ export default function Home() {
       </section>
 
       {/* QUICK START */}
-      <section className="max-w-7xl mx-auto px-8 md:px-12 pb-24">
-        <div className="afu-5 flex items-center gap-4 mb-8">
+      <section className="max-w-7xl mx-auto px-8 md:px-12 pb-28">
+        {/* Section divider */}
+        <div className="afu-5 flex items-center gap-6 mb-10">
           <span className="h-px flex-1" style={{ background: 'var(--border)' }} />
-          <span className="text-[10px] uppercase tracking-[0.2em]" style={{ color: 'var(--muted)' }}>
-            or start with a persona
-          </span>
+          <div className="flex flex-col items-center gap-1.5">
+            <span
+              className="text-[9px] uppercase tracking-[0.25em] font-medium"
+              style={{ color: 'var(--muted)', fontFamily: 'var(--font-syne)' }}
+            >
+              or skip the questions
+            </span>
+            <span
+              className="text-sm font-bold tracking-tight"
+              style={{ color: 'var(--text)', fontFamily: 'var(--font-syne)' }}
+            >
+              Pick your persona
+            </span>
+          </div>
           <span className="h-px flex-1" style={{ background: 'var(--border)' }} />
         </div>
         <QuickStart onSelect={handleQuickStart} />
