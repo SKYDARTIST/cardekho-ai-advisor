@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import QuickStart from '@/components/QuickStart'
+import Wizard from '@/components/Wizard'
 import { WizardAnswers } from '@/types'
 
 export default function Home() {
@@ -89,27 +90,7 @@ export default function Home() {
         <QuickStart onSelect={handleQuickStart} />
       </section>
 
-      {/* Wizard placeholder — will be replaced in Task 5 */}
-      {showWizard && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)' }}
-        >
-          <div
-            className="rounded-2xl p-8 max-w-md w-full"
-            style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
-          >
-            <p className="text-sm text-center" style={{ color: 'var(--muted)' }}>Wizard loading...</p>
-            <button
-              onClick={() => setShowWizard(false)}
-              className="mt-4 w-full text-xs"
-              style={{ color: 'var(--muted)' }}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+      {showWizard && <Wizard onClose={() => setShowWizard(false)} />}
     </main>
   )
 }
