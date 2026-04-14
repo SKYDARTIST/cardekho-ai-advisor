@@ -8,6 +8,18 @@
 
 ---
 
+## Screenshots
+
+| Landing — Light | Landing — Dark |
+|---|---|
+| ![Landing page light mode](Screenshot%202026-04-15%20at%204.41.32%20AM.png) | ![Landing page dark mode with personas](Screenshot%202026-04-15%20at%204.41.56%20AM.png) |
+
+| Results — Car Cards | Results — The Verdict |
+|---|---|
+| ![Results page showing 3 matched car cards](Screenshot%202026-04-15%20at%204.41.00%20AM.png) | ![The Verdict section with 5-year ownership cost comparison](Screenshot%202026-04-15%20at%204.41.15%20AM.png) |
+
+---
+
 ## What I Built and Why
 
 Most car-buying tools ask "what fuel type do you want?" or "how many cc engine?" — questions buyers can't answer without already knowing cars. The result: decision paralysis, filter overwhelm, abandoned sessions.
