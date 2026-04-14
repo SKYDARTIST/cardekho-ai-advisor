@@ -60,7 +60,7 @@ npm install @google/generative-ai
 - [ ] **Step 3: Create .env.local**
 
 ```bash
-echo 'GEMINI_API_KEY=AIzaSyBmmOx6uIVrPYNyD0lx6xISXcVw4Fsyj4I' > .env.local
+echo 'GEMINI_API_KEY=your_gemini_api_key_here' > .env.local
 ```
 
 - [ ] **Step 4: Verify dev server starts**
@@ -1812,7 +1812,7 @@ When prompted for project settings, accept defaults. When it asks to link to exi
 
 ```bash
 npx vercel env add GEMINI_API_KEY production
-# Paste: AIzaSyBmmOx6uIVrPYNyD0lx6xISXcVw4Fsyj4I
+# Paste: your_gemini_api_key_here
 ```
 
 - [ ] **Step 4: Redeploy with env var**
