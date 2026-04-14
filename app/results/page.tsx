@@ -34,11 +34,13 @@ function ResultsContent() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ answers }),
     })
-      .then(r => r.json())
-      .then(d => {
+      .then(async r => {
+        const d = await r.json()
+        if (r.status === 429) throw new Error('RATE_LIMIT')
         if (d.error) throw new Error(d.error)
-        setData(d)
+        return d
       })
+      .then(d => setData(d))
       .catch(e => setError(e.message))
       .finally(() => { clearInterval(msgInterval); setLoading(false) })
     return () => clearInterval(msgInterval)
@@ -198,10 +200,23 @@ function ResultsContent() {
   }
 
   if (error) {
+    const isRateLimit = error === 'RATE_LIMIT'
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg)' }}>
-        <div className="text-center">
-          <p className="mb-4 text-sm" style={{ color: 'var(--muted2)' }}>Something went wrong: {error}</p>
+        <div className="text-center max-w-sm px-6">
+          {isRateLimit ? (
+            <>
+              <p className="text-2xl mb-3">⏳</p>
+              <p className="font-semibold mb-2" style={{ fontFamily: 'var(--font-syne)', color: 'var(--text)' }}>
+                Too many requests
+              </p>
+              <p className="text-sm mb-5" style={{ color: 'var(--muted2)' }}>
+                You've hit the rate limit. Please wait a minute and try again.
+              </p>
+            </>
+          ) : (
+            <p className="mb-4 text-sm" style={{ color: 'var(--muted2)' }}>Something went wrong: {error}</p>
+          )}
           <button onClick={() => router.push('/')} className="text-sm font-medium" style={{ color: 'var(--orange-text)' }}>
             ← Start over
           </button>
@@ -218,10 +233,10 @@ function ResultsContent() {
         className="flex items-center justify-between px-8 md:px-12 py-5 sticky top-0 z-50 backdrop-blur-xl"
         style={{ borderBottom: '1px solid var(--border)', background: 'var(--nav-bg)' }}
       >
-        <div className="font-extrabold text-base flex items-center gap-2.5" style={{ fontFamily: 'var(--font-syne)' }}>
+        <a href="/" className="font-extrabold text-base flex items-center gap-2.5 cursor-pointer" style={{ fontFamily: 'var(--font-syne)', color: 'var(--text)', textDecoration: 'none' }}>
           <span className="w-2 h-2 rounded-full" style={{ background: 'var(--orange)', boxShadow: '0 0 12px var(--orange)' }} />
           Car<span style={{ color: 'var(--orange)' }}>Match</span> AI
-        </div>
+        </a>
         <div className="flex items-center gap-4">
           <ThemeToggle />
           <button
