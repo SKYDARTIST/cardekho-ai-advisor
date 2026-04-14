@@ -51,33 +51,145 @@ function ResultsContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-8" style={{ background: 'var(--bg)' }}>
-        <div className="relative">
-          <div
-            className="w-16 h-16 rounded-full border-2 animate-spin"
-            style={{ borderColor: 'rgba(255,85,0,0.2)', borderTopColor: 'var(--orange)' }}
-          />
-          <div
-            className="absolute inset-0 rounded-full"
-            style={{ background: 'radial-gradient(circle, rgba(255,85,0,0.1) 0%, transparent 70%)' }}
-          />
+      <div
+        className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
+        style={{ background: 'var(--bg)' }}
+      >
+        {/* Dot grid */}
+        <div className="absolute inset-0 dot-grid opacity-100 pointer-events-none" />
+
+        {/* Radial glow */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,85,0,0.06) 0%, transparent 70%)' }}
+        />
+
+        {/* Big background word */}
+        <div
+          className="absolute select-none pointer-events-none font-black leading-none"
+          style={{
+            fontFamily: 'var(--font-barlow)',
+            fontSize: 'clamp(120px, 20vw, 280px)',
+            color: 'rgba(255,85,0,0.04)',
+            letterSpacing: '-0.04em',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          MATCHING
         </div>
-        <div className="text-center space-y-2">
-          {loadingMessages.map((msg, i) => (
-            <p
-              key={i}
-              className="text-sm transition-all duration-500"
+
+        <div className="relative z-10 flex flex-col items-center gap-10 px-8 text-center">
+          {/* Large spinner */}
+          <div className="relative">
+            {/* Outer decorative ring */}
+            <div
+              className="absolute rounded-full"
               style={{
-                color: i === loadingMsg ? 'var(--orange-text)' : 'var(--muted)',
-                opacity: i === loadingMsg ? 1 : 0.4,
-                transform: i === loadingMsg ? 'scale(1.05)' : 'scale(1)',
-                fontFamily: i === loadingMsg ? 'var(--font-syne)' : 'inherit',
-                fontWeight: i === loadingMsg ? 600 : 400,
+                inset: '-16px',
+                border: '1px solid rgba(255,85,0,0.08)',
+              }}
+            />
+            {/* Spinning ring */}
+            <div
+              className="w-24 h-24 rounded-full border-2 animate-spin"
+              style={{
+                borderColor: 'rgba(255,85,0,0.15)',
+                borderTopColor: 'var(--orange)',
+                animationDuration: '1.2s',
+              }}
+            />
+            {/* Inner glow */}
+            <div
+              className="absolute inset-0 rounded-full"
+              style={{ background: 'radial-gradient(circle, rgba(255,85,0,0.12) 0%, transparent 70%)' }}
+            />
+            {/* Centre dot */}
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <div
+                className="w-2 h-2 rounded-full"
+                style={{ background: 'var(--orange)', boxShadow: '0 0 12px var(--orange)' }}
+              />
+            </div>
+          </div>
+
+          {/* Heading */}
+          <div>
+            <p
+              className="text-[10px] uppercase tracking-[0.25em] mb-4"
+              style={{ color: 'var(--muted)', fontFamily: 'var(--font-syne)' }}
+            >
+              Gemini 2.5 Flash is thinking
+            </p>
+            <h2
+              className="font-black leading-tight mb-2"
+              style={{
+                fontFamily: 'var(--font-barlow)',
+                fontSize: 'clamp(36px, 5vw, 64px)',
+                letterSpacing: '-0.02em',
+                color: 'var(--text)',
               }}
             >
-              {msg}
-            </p>
-          ))}
+              FINDING YOUR
+              <br />
+              <span style={{ color: 'var(--orange-text)' }}>PERFECT MATCH</span>
+            </h2>
+          </div>
+
+          {/* Step indicators */}
+          <div className="flex flex-col items-center gap-3 w-full max-w-xs">
+            {loadingMessages.map((msg, i) => (
+              <div
+                key={i}
+                className="w-full flex items-center gap-3 transition-all duration-500"
+                style={{ opacity: i <= loadingMsg ? 1 : 0.25 }}
+              >
+                {/* Step dot */}
+                <div
+                  className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-all duration-500"
+                  style={{
+                    background: i < loadingMsg
+                      ? 'var(--green-dim)'
+                      : i === loadingMsg
+                        ? 'var(--orange-dim)'
+                        : 'transparent',
+                    border: i < loadingMsg
+                      ? '1px solid var(--green)'
+                      : i === loadingMsg
+                        ? '1px solid var(--orange)'
+                        : '1px solid var(--border-strong)',
+                  }}
+                >
+                  {i < loadingMsg ? (
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                      <path d="M2 5l2.5 2.5L8 3" stroke="var(--green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  ) : i === loadingMsg ? (
+                    <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--orange)' }} />
+                  ) : null}
+                </div>
+                {/* Step label */}
+                <span
+                  className="text-sm text-left transition-all duration-500"
+                  style={{
+                    fontFamily: i === loadingMsg ? 'var(--font-syne)' : 'inherit',
+                    fontWeight: i === loadingMsg ? 600 : 400,
+                    color: i < loadingMsg
+                      ? 'var(--green)'
+                      : i === loadingMsg
+                        ? 'var(--orange-text)'
+                        : 'var(--muted)',
+                  }}
+                >
+                  {msg}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     )
