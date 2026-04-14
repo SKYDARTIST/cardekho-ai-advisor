@@ -68,10 +68,40 @@ interface CarCardProps {
   enterClass?: string
 }
 
+// SVG arc for match score ring
+function ScoreRing({ score, accent }: { score: number; accent: string }) {
+  const r = 18
+  const circ = 2 * Math.PI * r
+  const filled = (score / 100) * circ
+  return (
+    <div className="relative flex items-center justify-center" style={{ width: 48, height: 48 }}>
+      <svg width="48" height="48" viewBox="0 0 48 48" style={{ transform: 'rotate(-90deg)' }}>
+        <circle cx="24" cy="24" r={r} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="3" />
+        <circle
+          cx="24" cy="24" r={r} fill="none"
+          stroke={accent} strokeWidth="3"
+          strokeDasharray={`${filled} ${circ}`}
+          strokeLinecap="round"
+          style={{ transition: 'stroke-dasharray 0.8s cubic-bezier(0.16,1,0.3,1)' }}
+        />
+      </svg>
+      <span
+        className="absolute font-bold text-[11px]"
+        style={{ color: accent, fontFamily: 'var(--font-syne)' }}
+      >
+        {score}%
+      </span>
+    </div>
+  )
+}
+
 export default function CarCard({ rec, enterClass = '' }: CarCardProps) {
-  const { car, rank, emotionalHook, matchReasons } = rec
+  const { car, rank, matchScore, emotionalHook, matchReasons } = rec
   const isDark = useTheme()
   const [imgError, setImgError] = useState(false)
+
+  // Pick the top-rated review to feature
+  const featuredReview = car.reviews?.sort((a, b) => b.rating - a.rating)[0]
 
   const isTopPick   = rank === 1
   const fuelBg      = isDark ? (FUEL_BG_DARK[car.fuelType] ?? FUEL_BG_DARK.petrol) : (FUEL_BG_LIGHT[car.fuelType] ?? FUEL_BG_LIGHT.petrol)
@@ -173,13 +203,20 @@ export default function CarCard({ rec, enterClass = '' }: CarCardProps) {
           <p className="text-[10px] uppercase tracking-[0.18em] mb-1" style={{ color: 'var(--muted)' }}>
             {car.make}
           </p>
-          <div className="flex items-baseline justify-between gap-2">
-            <h3 className="font-extrabold text-2xl leading-tight" style={{ fontFamily: 'var(--font-syne)', color: 'var(--text)' }}>
-              {car.model}
-            </h3>
-            <span className="text-sm font-semibold shrink-0" style={{ color: fuelAccent, fontFamily: 'var(--font-syne)' }}>
-              {car.priceLabel}
-            </span>
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <h3 className="font-extrabold text-2xl leading-tight" style={{ fontFamily: 'var(--font-syne)', color: 'var(--text)' }}>
+                {car.model}
+              </h3>
+              <span className="text-sm font-semibold" style={{ color: fuelAccent, fontFamily: 'var(--font-syne)' }}>
+                {car.priceLabel}
+              </span>
+            </div>
+            {/* Match score ring */}
+            <div className="flex flex-col items-center gap-0.5 shrink-0">
+              <ScoreRing score={matchScore} accent={fuelAccent} />
+              <span className="text-[8px] uppercase tracking-widest" style={{ color: 'var(--muted)' }}>match</span>
+            </div>
           </div>
         </div>
 
@@ -239,6 +276,31 @@ export default function CarCard({ rec, enterClass = '' }: CarCardProps) {
             {FUEL_LABEL[car.fuelType] ?? car.fuelType}
           </span>
         </div>
+
+        {/* Featured review */}
+        {featuredReview && (
+          <div
+            className="mb-5 rounded-xl px-4 py-3"
+            style={{ background: isDark ? 'rgba(255,255,255,0.025)' : 'rgba(0,0,0,0.025)', border: '1px solid var(--border)' }}
+          >
+            {/* Stars */}
+            <div className="flex items-center gap-2 mb-1.5">
+              <div className="flex gap-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <svg key={i} width="10" height="10" viewBox="0 0 10 10" fill={i < featuredReview.rating ? fuelAccent : 'transparent'} stroke={i < featuredReview.rating ? fuelAccent : 'var(--border-strong)'} strokeWidth="1">
+                    <polygon points="5,1 6.18,3.76 9.24,4.18 7,6.26 7.64,9.24 5,7.76 2.36,9.24 3,6.26 0.76,4.18 3.82,3.76"/>
+                  </svg>
+                ))}
+              </div>
+              <span className="text-[9px] uppercase tracking-wider" style={{ color: 'var(--muted)' }}>
+                {featuredReview.reviewer}
+              </span>
+            </div>
+            <p className="text-[11px] leading-relaxed" style={{ color: 'var(--muted2)' }}>
+              &ldquo;{featuredReview.quote}&rdquo;
+            </p>
+          </div>
+        )}
 
         {/* CTA */}
         <a

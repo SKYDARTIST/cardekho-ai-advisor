@@ -10,6 +10,12 @@ export interface WizardAnswers {
   budget: BudgetType
 }
 
+export interface CarReview {
+  rating: number   // 1-5
+  quote: string
+  reviewer: string
+}
+
 export interface CarSpec {
   id: string
   make: string
@@ -27,11 +33,13 @@ export interface CarSpec {
   features: string[]
   priceLabel: string
   imageUrl?: string
+  reviews?: CarReview[]
 }
 
 export interface CarRecommendation {
   car: CarSpec
   rank: 1 | 2 | 3
+  matchScore: number   // 0-100
   emotionalHook: string
   matchReasons: string[]
 }

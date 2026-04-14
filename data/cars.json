@@ -20,7 +20,19 @@
       "ventilated_seats"
     ],
     "priceLabel": "₹8.1L – ₹15.5L",
-    "imageUrl": "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "5-star safety was the deciding factor. Best build quality in the segment.",
+        "reviewer": "New parent, Delhi"
+      },
+      {
+        "rating": 4,
+        "quote": "Punchy turbo, great NVH. Slightly stiff ride on bad roads but worth it.",
+        "reviewer": "Daily commuter, Pune"
+      }
+    ]
   },
   {
     "id": "tata-nexon-ev",
@@ -43,7 +55,19 @@
       "fast_charging"
     ],
     "priceLabel": "₹14.7L – ₹19.9L",
-    "imageUrl": "https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "Running costs dropped 70%. City driving on one charge for a full week.",
+        "reviewer": "Tech professional, Bangalore"
+      },
+      {
+        "rating": 4,
+        "quote": "Range anxiety outside city. But for daily commute — completely flawless.",
+        "reviewer": "Solo driver, Hyderabad"
+      }
+    ]
   },
   {
     "id": "hyundai-creta",
@@ -66,7 +90,19 @@
       "bose_sound"
     ],
     "priceLabel": "₹11L – ₹20.2L",
-    "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "Family loves the space and ride quality. Sunroof is a weekend essential.",
+        "reviewer": "Family buyer, Mumbai"
+      },
+      {
+        "rating": 4,
+        "quote": "Best resale value in segment. Interior quality justifies every rupee.",
+        "reviewer": "Second-time buyer, Chennai"
+      }
+    ]
   },
   {
     "id": "maruti-grand-vitara",
@@ -89,7 +125,19 @@
       "heads_up_display"
     ],
     "priceLabel": "₹10.7L – ₹20L",
-    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "27 kmpl in hybrid mode is real. Monthly fuel bill almost halved.",
+        "reviewer": "Long-distance commuter, Ahmedabad"
+      },
+      {
+        "rating": 4,
+        "quote": "Strong hybrid tech at this price is unmatched. Toyota reliability is a bonus.",
+        "reviewer": "Engineer, Bangalore"
+      }
+    ]
   },
   {
     "id": "mahindra-xuv300",
@@ -111,7 +159,19 @@
       "wireless_charging"
     ],
     "priceLabel": "₹8.4L – ₹14.4L",
-    "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "5-star NCAP under ₹15L — nothing else comes close for safety-conscious buyers.",
+        "reviewer": "Safety-first buyer, Noida"
+      },
+      {
+        "rating": 4,
+        "quote": "Turbo petrol punches well above its weight. Sporty for the price.",
+        "reviewer": "Young professional, Pune"
+      }
+    ]
   },
   {
     "id": "mahindra-thar",
@@ -134,7 +194,19 @@
       "removable_roof"
     ],
     "priceLabel": "₹14L – ₹17.6L",
-    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "Took it to Spiti. Zero drama. Built for roads that barely exist.",
+        "reviewer": "Weekend adventurer, Gurgaon"
+      },
+      {
+        "rating": 4,
+        "quote": "Not a daily driver — but weekends completely changed with Thar.",
+        "reviewer": "Adventure enthusiast, Jaipur"
+      }
+    ]
   },
   {
     "id": "maruti-jimny",
@@ -157,7 +229,19 @@
       "adventure_mode"
     ],
     "priceLabel": "₹12.7L – ₹15L",
-    "imageUrl": "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 4,
+        "quote": "3-door makes city parking easy. Off-road capability genuinely impressive.",
+        "reviewer": "Off-road enthusiast, Bangalore"
+      },
+      {
+        "rating": 4,
+        "quote": "Tiny but mighty. Took it on forest trails and it surprised everyone.",
+        "reviewer": "Weekend warrior, Coimbatore"
+      }
+    ]
   },
   {
     "id": "kia-seltos",
@@ -181,7 +265,19 @@
       "ambient_lighting"
     ],
     "priceLabel": "₹10.9L – ₹20.4L",
-    "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "Panoramic sunroof, Bose audio, 5-star NCAP. Unmatched value at ₹17L.",
+        "reviewer": "Premium buyer, Hyderabad"
+      },
+      {
+        "rating": 4,
+        "quote": "DCT gearbox is silky. Turbo pull never gets old in city traffic.",
+        "reviewer": "Performance seeker, Mumbai"
+      }
+    ]
   },
   {
     "id": "honda-city",
@@ -204,7 +300,19 @@
       "lane_watch"
     ],
     "priceLabel": "₹11.8L – ₹16.4L",
-    "imageUrl": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "10 years and still feels premium. Honda reliability is not a myth.",
+        "reviewer": "Long-term owner, Chennai"
+      },
+      {
+        "rating": 4,
+        "quote": "Best sedan for highway. Stable, refined, comfortable on 500km runs.",
+        "reviewer": "Sales professional, Nagpur"
+      }
+    ]
   },
   {
     "id": "maruti-swift",
@@ -226,7 +334,19 @@
       "wireless_charging"
     ],
     "priceLabel": "₹6.5L – ₹9.6L",
-    "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "Best city car ever made for India. Parks anywhere, runs forever.",
+        "reviewer": "City dweller, Delhi"
+      },
+      {
+        "rating": 4,
+        "quote": "24+ kmpl achievable. Monthly fuel costs are embarrassingly low.",
+        "reviewer": "Budget-conscious, Lucknow"
+      }
+    ]
   },
   {
     "id": "hyundai-i20",
@@ -249,7 +369,19 @@
       "adas"
     ],
     "priceLabel": "₹7L – ₹13.5L",
-    "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "Sunroof in a hatchback under ₹10L — i20 is why I never needed a sedan.",
+        "reviewer": "Young buyer, Bangalore"
+      },
+      {
+        "rating": 4,
+        "quote": "Turbo i20 is genuinely fun. Fastest-feeling car in the hatchback space.",
+        "reviewer": "Driving enthusiast, Pune"
+      }
+    ]
   },
   {
     "id": "tata-punch",
@@ -271,7 +403,19 @@
       "terrain_modes"
     ],
     "priceLabel": "₹6L – ₹9.5L",
-    "imageUrl": "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "5-star safety for under ₹9L. Bought this because my kids ride in it daily.",
+        "reviewer": "Safety-first parent, Kolkata"
+      },
+      {
+        "rating": 4,
+        "quote": "High seating position makes city driving confidence-inspiring.",
+        "reviewer": "First-time buyer, Bhubaneswar"
+      }
+    ]
   },
   {
     "id": "tata-punch-ev",
@@ -294,7 +438,19 @@
       "v2l"
     ],
     "priceLabel": "₹11L – ₹15.5L",
-    "imageUrl": "https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "Urban EV perfection. Never visited a petrol pump in 8 months.",
+        "reviewer": "City commuter, Bangalore"
+      },
+      {
+        "rating": 4,
+        "quote": "For 40km daily round trips — genuinely ideal. Range is honest.",
+        "reviewer": "IT professional, Hyderabad"
+      }
+    ]
   },
   {
     "id": "mg-zs-ev",
@@ -318,7 +474,19 @@
       "ambient_lighting"
     ],
     "priceLabel": "₹19L – ₹25.2L",
-    "imageUrl": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 4,
+        "quote": "Interior feels more expensive than the price tag. EV range is honest.",
+        "reviewer": "Tech enthusiast, Noida"
+      },
+      {
+        "rating": 4,
+        "quote": "MG's connected car features are the best in segment. App actually works.",
+        "reviewer": "Premium EV buyer, Mumbai"
+      }
+    ]
   },
   {
     "id": "mahindra-xuv400",
@@ -341,7 +509,19 @@
       "wireless_charging"
     ],
     "priceLabel": "₹15.5L – ₹19.2L",
-    "imageUrl": "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 4,
+        "quote": "Turbo-like instant torque. First EV purchase — not disappointed at all.",
+        "reviewer": "First-time EV buyer, Delhi"
+      },
+      {
+        "rating": 4,
+        "quote": "Homegrown EV with solid range. More than enough for weekly top-ups.",
+        "reviewer": "Environment-conscious buyer, Pune"
+      }
+    ]
   },
   {
     "id": "toyota-innova-hycross",
@@ -365,7 +545,19 @@
       "ottoman_seats"
     ],
     "priceLabel": "₹18.9L – ₹29L",
-    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "7-seater, silent hybrid, effortless highways. Business travel changed completely.",
+        "reviewer": "Business traveller, Bangalore"
+      },
+      {
+        "rating": 5,
+        "quote": "Family of 6 fit comfortably for a 1000km road trip. Not a single complaint.",
+        "reviewer": "Large family, Indore"
+      }
+    ]
   },
   {
     "id": "maruti-ertiga",
@@ -387,7 +579,19 @@
       "captain_seats"
     ],
     "priceLabel": "₹8.7L – ₹13.7L",
-    "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "7 seats under ₹13L with 20+ kmpl. Nothing else exists in this category.",
+        "reviewer": "Large family, Patna"
+      },
+      {
+        "rating": 4,
+        "quote": "CNG variant running costs are absurdly low. Best family value in India.",
+        "reviewer": "Practical buyer, Surat"
+      }
+    ]
   },
   {
     "id": "mahindra-xuv700",
@@ -411,7 +615,19 @@
       "7seats"
     ],
     "priceLabel": "₹14L – ₹27L",
-    "imageUrl": "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "ADAS made highway driving genuinely less tiring. Worth every paisa.",
+        "reviewer": "Highway driver, Gurgaon"
+      },
+      {
+        "rating": 5,
+        "quote": "Diesel auto — unbeatable combo for long-distance family trips.",
+        "reviewer": "Family SUV buyer, Chandigarh"
+      }
+    ]
   },
   {
     "id": "skoda-slavia",
@@ -434,7 +650,19 @@
       "adas"
     ],
     "priceLabel": "₹11.5L – ₹20L",
-    "imageUrl": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "German engineering feel without the German price. Slavia is criminally underrated.",
+        "reviewer": "Enthusiast buyer, Pune"
+      },
+      {
+        "rating": 4,
+        "quote": "DSG gearbox, 1.5 TSI, sunroof. All at this price? Europeans know cars.",
+        "reviewer": "European brand fan, Bangalore"
+      }
+    ]
   },
   {
     "id": "volkswagen-virtus",
@@ -457,7 +685,19 @@
       "adas"
     ],
     "priceLabel": "₹11.6L – ₹19.4L",
-    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "521L boot is bigger than most SUVs. Perfect pet and luggage hauler.",
+        "reviewer": "Pet owner, Mumbai"
+      },
+      {
+        "rating": 4,
+        "quote": "1.5 TSI DSG is addictive. Does not feel like a ₹15L car at all.",
+        "reviewer": "Performance sedan buyer, Delhi"
+      }
+    ]
   },
   {
     "id": "hyundai-exter",
@@ -479,7 +719,19 @@
       "adas"
     ],
     "priceLabel": "₹6L – ₹10.2L",
-    "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 4,
+        "quote": "First car with a sunroof under ₹8L. Hyundai keeps doing impossible things.",
+        "reviewer": "First-time buyer, Jaipur"
+      },
+      {
+        "rating": 4,
+        "quote": "Compact enough for city, high enough for potholes. Daily driver sorted.",
+        "reviewer": "Urban commuter, Indore"
+      }
+    ]
   },
   {
     "id": "renault-kwid",
@@ -500,7 +752,19 @@
       "reverse_camera"
     ],
     "priceLabel": "₹4.7L – ₹6.8L",
-    "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 4,
+        "quote": "Cheapest car that actually feels like a car. Honest, simple, does the job.",
+        "reviewer": "First vehicle, small town"
+      },
+      {
+        "rating": 3,
+        "quote": "Gets the job done at minimum cost. Do not expect luxury, expect reliability.",
+        "reviewer": "Budget buyer, Nashik"
+      }
+    ]
   },
   {
     "id": "maruti-baleno",
@@ -523,7 +787,19 @@
       "heads_up_display"
     ],
     "priceLabel": "₹6.6L – ₹9.9L",
-    "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "Roomiest hatchback interior in India. Headroom shames some SUVs.",
+        "reviewer": "Tall driver, Bangalore"
+      },
+      {
+        "rating": 4,
+        "quote": "22+ kmpl in mixed driving is real. Baleno sips fuel while others gulp.",
+        "reviewer": "Mileage-focused buyer, Nagpur"
+      }
+    ]
   },
   {
     "id": "toyota-fortuner",
@@ -547,7 +823,19 @@
       "premium_interior"
     ],
     "priceLabel": "₹33.4L – ₹51.4L",
-    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "Presence on road is unmatched. Highway king. Everyone makes way.",
+        "reviewer": "Business owner, Delhi"
+      },
+      {
+        "rating": 4,
+        "quote": "Highway at 120kmph, dead silent. Diesel torque effortless at all speeds.",
+        "reviewer": "Highway regular, Ludhiana"
+      }
+    ]
   },
   {
     "id": "hyundai-alcazar",
@@ -571,7 +859,19 @@
       "bose_sound"
     ],
     "priceLabel": "₹15L – ₹21.5L",
-    "imageUrl": "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 4,
+        "quote": "6-seater with captain seats — rear passengers feel like business class.",
+        "reviewer": "Family buyer, Hyderabad"
+      },
+      {
+        "rating": 4,
+        "quote": "Premium feel without Fortuner prices. Diesel is very refined.",
+        "reviewer": "Practical premium buyer, Chennai"
+      }
+    ]
   },
   {
     "id": "kia-carens",
@@ -595,7 +895,19 @@
       "adas"
     ],
     "priceLabel": "₹10.5L – ₹20.1L",
-    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "7 seats, ADAS, panoramic sunroof under ₹20L. Nothing else does this.",
+        "reviewer": "Young family, Bangalore"
+      },
+      {
+        "rating": 4,
+        "quote": "Rear AC vents, reclinable second row — best 3-row value by far.",
+        "reviewer": "Large family buyer, Kochi"
+      }
+    ]
   },
   {
     "id": "mg-hector",
@@ -619,7 +931,19 @@
       "ambient_lighting"
     ],
     "priceLabel": "₹14L – ₹22L",
-    "imageUrl": "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 4,
+        "quote": "i-SMART features are genuinely useful. Voice commands actually work.",
+        "reviewer": "Tech buyer, Noida"
+      },
+      {
+        "rating": 4,
+        "quote": "Biggest screen in segment and panoramic sunroof. Value is undeniable.",
+        "reviewer": "Features-first buyer, Gurgaon"
+      }
+    ]
   },
   {
     "id": "jeep-meridian",
@@ -643,7 +967,19 @@
       "alpine_sound"
     ],
     "priceLabel": "₹29.9L – ₹37L",
-    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "3-row premium SUV with Jeep DNA. Highway confidence at 150kmph is real.",
+        "reviewer": "Premium SUV buyer, Pune"
+      },
+      {
+        "rating": 4,
+        "quote": "Diesel auto in a proper 3-row SUV. Nothing else in this segment.",
+        "reviewer": "Highway driver, Mumbai"
+      }
+    ]
   },
   {
     "id": "tata-harrier",
@@ -667,7 +1003,19 @@
       "jbl_sound"
     ],
     "priceLabel": "₹15L – ₹26.4L",
-    "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "Best-looking Indian car. 5-star NCAP, panoramic sunroof, diesel — complete.",
+        "reviewer": "Design-conscious buyer, Bangalore"
+      },
+      {
+        "rating": 4,
+        "quote": "Build quality silences every Tata sceptic. Better than Korean rivals inside.",
+        "reviewer": "Converted Tata fan, Hyderabad"
+      }
+    ]
   },
   {
     "id": "tata-safari",
@@ -692,7 +1040,19 @@
       "7seats"
     ],
     "priceLabel": "₹15.5L – ₹27.3L",
-    "imageUrl": "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "7-seater SUV where the third row is actually usable for adults. Rare.",
+        "reviewer": "Extended family owner, Kolkata"
+      },
+      {
+        "rating": 4,
+        "quote": "Road presence + safety + 7 seats. Indian families have no reason to look elsewhere.",
+        "reviewer": "Family road trip buyer, Nashik"
+      }
+    ]
   },
   {
     "id": "skoda-kushaq",
@@ -715,7 +1075,19 @@
       "wireless_charging"
     ],
     "priceLabel": "₹11.9L – ₹19.5L",
-    "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "DSG gearbox changes how you experience city traffic. So smooth.",
+        "reviewer": "Driving enthusiast, Pune"
+      },
+      {
+        "rating": 4,
+        "quote": "5-star NCAP + TSI engine + Skoda build. This is the adult compact SUV.",
+        "reviewer": "Premium compact buyer, Delhi"
+      }
+    ]
   },
   {
     "id": "honda-amaze",
@@ -737,7 +1109,19 @@
       "one_touch_sunroof"
     ],
     "priceLabel": "₹8L – ₹10.7L",
-    "imageUrl": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 4,
+        "quote": "Most practical entry sedan. Boot is massive, fuel economy class-leading.",
+        "reviewer": "Practical buyer, Lucknow"
+      },
+      {
+        "rating": 4,
+        "quote": "Honda CVT is the best gearbox for city traffic. Commuting is no longer stressful.",
+        "reviewer": "City commuter, Mumbai"
+      }
+    ]
   },
   {
     "id": "toyota-glanza",
@@ -759,7 +1143,19 @@
       "360_camera"
     ],
     "priceLabel": "₹6.7L – ₹10.2L",
-    "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 4,
+        "quote": "Toyota reliability badge on Baleno platform. Best of both worlds.",
+        "reviewer": "Toyota loyalist, Chennai"
+      },
+      {
+        "rating": 4,
+        "quote": "22+ kmpl means I fill up once a month. Running costs are a joke.",
+        "reviewer": "Mileage-obsessed buyer, Ahmedabad"
+      }
+    ]
   },
   {
     "id": "maruti-fronx",
@@ -782,7 +1178,19 @@
       "heads_up_display"
     ],
     "priceLabel": "₹7.5L – ₹13L",
-    "imageUrl": "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 4,
+        "quote": "Turbo in a ₹10L car — Fronx should not exist at this price but it does.",
+        "reviewer": "Surprised buyer, Bangalore"
+      },
+      {
+        "rating": 4,
+        "quote": "Best-looking Maruti ever made. Coupe SUV at hatchback price.",
+        "reviewer": "Design-conscious buyer, Pune"
+      }
+    ]
   },
   {
     "id": "mahindra-scorpio-n",
@@ -807,7 +1215,19 @@
       "terrain_modes"
     ],
     "priceLabel": "₹14L – ₹24.5L",
-    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "6 airbags, 5-star, diesel or petrol — SUV you can take anywhere.",
+        "reviewer": "Adventure family, Jaipur"
+      },
+      {
+        "rating": 4,
+        "quote": "Highway presence is intimidating. This is what a proper Indian SUV should be.",
+        "reviewer": "Road tripper, Nagpur"
+      }
+    ]
   },
   {
     "id": "hyundai-venue",
@@ -830,7 +1250,19 @@
       "bose_sound"
     ],
     "priceLabel": "₹7.9L – ₹13.5L",
-    "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 4,
+        "quote": "Best connected features in sub-₹13L. Bluelink works better than expected.",
+        "reviewer": "Tech-first buyer, Bangalore"
+      },
+      {
+        "rating": 4,
+        "quote": "Compact enough for Bangalore roads and does not feel cramped inside.",
+        "reviewer": "City SUV buyer, Bangalore"
+      }
+    ]
   },
   {
     "id": "kia-sonet",
@@ -854,7 +1286,19 @@
       "ambient_lighting"
     ],
     "priceLabel": "₹8L – ₹16L",
-    "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "Panoramic sunroof, ventilated seats, Bose audio under ₹16L. Kia is unreal.",
+        "reviewer": "Features buyer, Hyderabad"
+      },
+      {
+        "rating": 4,
+        "quote": "6 airbags standard now. Safety plus features at this price is untouchable.",
+        "reviewer": "Safety-conscious buyer, Mumbai"
+      }
+    ]
   },
   {
     "id": "maruti-dzire",
@@ -876,7 +1320,19 @@
       "sunroof"
     ],
     "priceLabel": "₹6.8L – ₹9.6L",
-    "imageUrl": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "India's best-selling sedan for a reason. Practical, economical, reliable.",
+        "reviewer": "Practical buyer, Lucknow"
+      },
+      {
+        "rating": 4,
+        "quote": "CNG Dzire at ₹2.5/km running cost. Nothing touches this in Indian cities.",
+        "reviewer": "Value buyer, Delhi"
+      }
+    ]
   },
   {
     "id": "nissan-magnite",
@@ -898,7 +1354,19 @@
       "360_camera"
     ],
     "priceLabel": "₹6L – ₹12L",
-    "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 4,
+        "quote": "Most space per rupee in India. 336L boot in a sub-₹7L car — Nissan wins.",
+        "reviewer": "Value seeker, Coimbatore"
+      },
+      {
+        "rating": 3,
+        "quote": "Decent for the price. Turbo variant is actually fun. Missed by most people.",
+        "reviewer": "Budget buyer, Bhopal"
+      }
+    ]
   },
   {
     "id": "mahindra-be6",
@@ -923,6 +1391,18 @@
       "fast_charging"
     ],
     "priceLabel": "₹18.9L – ₹26.9L",
-    "imageUrl": "https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b?w=600&h=340&fit=crop&q=85"
+    "imageUrl": "https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b?w=600&h=340&fit=crop&q=85",
+    "reviews": [
+      {
+        "rating": 5,
+        "quote": "Not a car. A spaceship. Instant 0-100 in 6.7s from a family SUV.",
+        "reviewer": "Performance EV buyer, Bangalore"
+      },
+      {
+        "rating": 5,
+        "quote": "ADAS level 2, 5-star NCAP, 682km range. EV finally got serious in India.",
+        "reviewer": "Future-focused buyer, Pune"
+      }
+    ]
   }
 ]

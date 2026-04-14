@@ -56,8 +56,9 @@ ${carsJson}
 INSTRUCTIONS:
 1. Select the 3 best-matching cars from the list above
 2. Rank them 1 (best match) to 3
-3. For each car write an "emotionalHook" — 1-2 sentences that connect the car to THIS BUYER'S SPECIFIC LIFE. Reference their drive pattern, passengers, or vibe. Sound like a knowledgeable friend, not a salesperson.
-4. Give 2-3 matchReasons as short factual bullet points (e.g., "Best-in-class 5★ NCAP safety", "350L boot fits stroller + groceries")
+3. For each car assign a "matchScore" (0-100) representing how well it fits this buyer. #1 pick should score 85-98, #2 pick 70-84, #3 pick 55-72. Be precise — don't round to 5s.
+4. For each car write an "emotionalHook" — 1-2 sentences that connect the car to THIS BUYER'S SPECIFIC LIFE. Reference their drive pattern, passengers, or vibe. Sound like a knowledgeable friend, not a salesperson.
+5. Give 2-3 matchReasons as short factual bullet points (e.g., "Best-in-class 5★ NCAP safety", "350L boot fits stroller + groceries")
 
 RESPOND WITH VALID JSON ONLY. No markdown, no explanation, no code fences. Raw JSON only. Format:
 {
@@ -65,6 +66,7 @@ RESPOND WITH VALID JSON ONLY. No markdown, no explanation, no code fences. Raw J
     {
       "carId": "tata-nexon",
       "rank": 1,
+      "matchScore": 93,
       "emotionalHook": "...",
       "matchReasons": ["...", "...", "..."]
     }
@@ -88,6 +90,7 @@ export async function getRecommendations(answers: WizardAnswers): Promise<Recomm
   const recommendations: CarRecommendation[] = parsed.recommendations.map((r: {
     carId: string;
     rank: 1 | 2 | 3;
+    matchScore: number;
     emotionalHook: string;
     matchReasons: string[];
   }) => {
@@ -96,6 +99,7 @@ export async function getRecommendations(answers: WizardAnswers): Promise<Recomm
     return {
       car,
       rank: r.rank,
+      matchScore: r.matchScore ?? (r.rank === 1 ? 92 : r.rank === 2 ? 78 : 64),
       emotionalHook: r.emotionalHook,
       matchReasons: r.matchReasons,
     }
