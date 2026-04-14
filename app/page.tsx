@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import QuickStart from '@/components/QuickStart'
 import Wizard from '@/components/Wizard'
+import ThemeToggle from '@/components/ThemeToggle'
 import { WizardAnswers } from '@/types'
 
 export default function Home() {
@@ -21,7 +22,7 @@ export default function Home() {
       {/* NAV */}
       <nav
         className="flex items-center justify-between px-8 md:px-12 py-5 sticky top-0 z-50 backdrop-blur-xl"
-        style={{ borderBottom: '1px solid var(--border)', background: 'rgba(7,7,15,0.85)' }}
+        style={{ borderBottom: '1px solid var(--border)', background: 'var(--nav-bg)' }}
       >
         <div className="font-extrabold text-base flex items-center gap-2.5" style={{ fontFamily: 'var(--font-syne)' }}>
           <span
@@ -37,6 +38,7 @@ export default function Home() {
           >
             by CarDekho
           </span>
+          <ThemeToggle />
           <button
             onClick={() => setShowWizard(true)}
             className="text-[11px] font-semibold px-4 py-2 rounded-full transition-all"
@@ -191,18 +193,29 @@ export default function Home() {
                 style={{ border: '1px dashed rgba(255,85,0,0.18)' }}
               />
 
-              {/* Car emoji — main */}
+              {/* Real car image — circular, floating */}
               <div className="a-float relative z-10 flex flex-col items-center">
-                <span
-                  className="select-none"
+                <div
+                  className="relative overflow-hidden"
                   style={{
-                    fontSize: '160px',
-                    lineHeight: 1,
-                    filter: 'drop-shadow(0 20px 60px rgba(255,85,0,0.25)) drop-shadow(0 4px 16px rgba(0,0,0,0.8))',
+                    width: '280px',
+                    height: '280px',
+                    borderRadius: '50%',
+                    border: '1px solid rgba(255,85,0,0.2)',
+                    boxShadow: '0 0 60px rgba(255,85,0,0.15), 0 30px 60px rgba(0,0,0,0.5)',
                   }}
                 >
-                  🚙
-                </span>
+                  <img
+                    src="https://images.unsplash.com/photo-1619682817481-e994891cd1f5?w=600&h=600&fit=crop&q=85"
+                    alt="Featured car"
+                    className="w-full h-full object-cover"
+                    style={{ objectPosition: 'center 60%' }}
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: 'linear-gradient(135deg, rgba(255,85,0,0.08) 0%, transparent 60%)' }}
+                  />
+                </div>
                 <div
                   className="mt-4 px-4 py-1.5 rounded-full text-[11px] font-semibold tracking-wider uppercase"
                   style={{

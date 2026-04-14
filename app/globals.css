@@ -17,6 +17,7 @@
   --muted: #52526e;
   --muted2: #9090ae;
   --text: #ededff;
+  --nav-bg: rgba(7,7,15,0.85);
 }
 
 body {
@@ -68,4 +69,36 @@ body {
 .dot-grid {
   background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
   background-size: 28px 28px;
+}
+
+/* ── Light mode ── */
+[data-theme="light"] {
+  --bg:           #f4f0e6;
+  --surface:      #ffffff;
+  --surface2s:    #ede9de;
+  --surface3:     #e4dfd2;
+  --border:       rgba(0,0,0,0.07);
+  --border-strong: rgba(0,0,0,0.13);
+  --orange:       #ff5500;
+  --orange-dim:   rgba(255,85,0,0.08);
+  --orange-glow:  rgba(255,85,0,0.15);
+  --orange-text:  #c74000;
+  --green:        #00965a;
+  --green-dim:    rgba(0,150,90,0.08);
+  --muted:        #9a9080;
+  --muted2:       #5a5040;
+  --text:         #1a1208;
+  --nav-bg:       rgba(244,240,230,0.88);
+}
+
+[data-theme="light"] .dot-grid {
+  background-image: radial-gradient(circle, rgba(0,0,0,0.07) 1px, transparent 1px);
+}
+
+[data-theme="light"] .img-bottom-fade {
+  background: linear-gradient(to top, #ffffff, transparent) !important;
+}
+
+[data-theme="light"] .rank-wm {
+  color: rgba(0,0,0,0.04) !important;
 }

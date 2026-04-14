@@ -1,6 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import { CarRecommendation } from '@/types'
+import { useTheme } from '@/hooks/useTheme'
 
 const NCAP_COLOR: Record<number, string> = {
   5: '#00d68f',
@@ -12,15 +14,14 @@ const NCAP_COLOR: Record<number, string> = {
 }
 
 const FUEL_LABEL: Record<string, string> = {
-  petrol: 'Petrol',
-  diesel: 'Diesel',
-  electric: 'Electric ⚡',
-  hybrid: 'Hybrid 🌿',
-  cng: 'CNG',
+  petrol:   'Petrol',
+  diesel:   'Diesel',
+  electric: 'Electric',
+  hybrid:   'Hybrid',
+  cng:      'CNG',
 }
 
-// Gradient per fuel type — the "image area" background
-const FUEL_BG: Record<string, string> = {
+const FUEL_BG_DARK: Record<string, string> = {
   petrol:   'linear-gradient(145deg, #100800 0%, #1f0c00 40%, #120600 100%)',
   diesel:   'linear-gradient(145deg, #07080f 0%, #0d0f20 40%, #070912 100%)',
   electric: 'linear-gradient(145deg, #040f1a 0%, #061828 40%, #03111a 100%)',
@@ -28,12 +29,28 @@ const FUEL_BG: Record<string, string> = {
   cng:      'linear-gradient(145deg, #060c14 0%, #0a1624 40%, #050b14 100%)',
 }
 
-const FUEL_GLOW: Record<string, string> = {
+const FUEL_BG_LIGHT: Record<string, string> = {
+  petrol:   'linear-gradient(145deg, #fff8f2 0%, #fff0e6 40%, #fff8f2 100%)',
+  diesel:   'linear-gradient(145deg, #f5f5fa 0%, #ecedf8 40%, #f5f5fa 100%)',
+  electric: 'linear-gradient(145deg, #f0f8ff 0%, #e0f3ff 40%, #f0f8ff 100%)',
+  hybrid:   'linear-gradient(145deg, #f0faf5 0%, #e0f5eb 40%, #f0faf5 100%)',
+  cng:      'linear-gradient(145deg, #f0f6ff 0%, #e0edff 40%, #f0f6ff 100%)',
+}
+
+const FUEL_GLOW_DARK: Record<string, string> = {
   petrol:   'rgba(255, 85, 0, 0.22)',
   diesel:   'rgba(99, 102, 241, 0.18)',
   electric: 'rgba(0, 180, 255, 0.22)',
   hybrid:   'rgba(0, 214, 143, 0.22)',
   cng:      'rgba(56, 189, 248, 0.18)',
+}
+
+const FUEL_GLOW_LIGHT: Record<string, string> = {
+  petrol:   'rgba(255, 85, 0, 0.12)',
+  diesel:   'rgba(99, 102, 241, 0.1)',
+  electric: 'rgba(0, 150, 255, 0.12)',
+  hybrid:   'rgba(0, 160, 90, 0.12)',
+  cng:      'rgba(56, 150, 220, 0.1)',
 }
 
 const FUEL_ACCENT: Record<string, string> = {
@@ -42,14 +59,6 @@ const FUEL_ACCENT: Record<string, string> = {
   electric: '#00b4ff',
   hybrid:   '#00d68f',
   cng:      '#38bdf8',
-}
-
-const CAR_EMOJI: Record<string, string> = {
-  suv:       '🚙',
-  sedan:     '🚗',
-  hatchback: '🚘',
-  mpv:       '🚐',
-  pickup:    '🛻',
 }
 
 const RANK_NUM = ['01', '02', '03']
@@ -61,21 +70,30 @@ interface CarCardProps {
 
 export default function CarCard({ rec, enterClass = '' }: CarCardProps) {
   const { car, rank, emotionalHook, matchReasons } = rec
-  const isTopPick = rank === 1
-  const fuelGlow  = FUEL_GLOW[car.fuelType]  || FUEL_GLOW.petrol
-  const fuelBg    = FUEL_BG[car.fuelType]    || FUEL_BG.petrol
-  const fuelAccent = FUEL_ACCENT[car.fuelType] || FUEL_ACCENT.petrol
+  const isDark = useTheme()
+  const [imgError, setImgError] = useState(false)
+
+  const isTopPick   = rank === 1
+  const fuelBg      = isDark ? (FUEL_BG_DARK[car.fuelType] ?? FUEL_BG_DARK.petrol) : (FUEL_BG_LIGHT[car.fuelType] ?? FUEL_BG_LIGHT.petrol)
+  const fuelGlow    = isDark ? (FUEL_GLOW_DARK[car.fuelType] ?? FUEL_GLOW_DARK.petrol) : (FUEL_GLOW_LIGHT[car.fuelType] ?? FUEL_GLOW_LIGHT.petrol)
+  const fuelAccent  = FUEL_ACCENT[car.fuelType] ?? '#ff5500'
+
+  const rankWmColor = isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)'
+  const imgFade     = isDark
+    ? 'linear-gradient(to top, var(--surface) 0%, transparent 100%)'
+    : 'linear-gradient(to top, #ffffff 0%, transparent 100%)'
 
   return (
     <div
       className={`relative flex flex-col rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 ${enterClass}`}
       style={{
         background: 'var(--surface)',
-        border: isTopPick ? `1px solid rgba(255,85,0,0.5)` : '1px solid var(--border)',
-        boxShadow: isTopPick ? '0 0 40px rgba(255,85,0,0.1)' : '0 4px 24px rgba(0,0,0,0.4)',
+        border: isTopPick ? `1px solid rgba(255,85,0,0.45)` : '1px solid var(--border)',
+        boxShadow: isTopPick
+          ? '0 0 40px rgba(255,85,0,0.08)'
+          : isDark ? '0 4px 24px rgba(0,0,0,0.4)' : '0 4px 24px rgba(0,0,0,0.08)',
       }}
     >
-
       {/* ── Image area ── */}
       <div
         className="relative overflow-hidden flex items-center justify-center"
@@ -84,99 +102,82 @@ export default function CarCard({ rec, enterClass = '' }: CarCardProps) {
         {/* Radial glow */}
         <div
           className="absolute inset-0"
-          style={{
-            background: `radial-gradient(circle at 50% 60%, ${fuelGlow} 0%, transparent 65%)`,
-          }}
+          style={{ background: `radial-gradient(circle at 50% 60%, ${fuelGlow} 0%, transparent 65%)` }}
         />
+
+        {/* Real car photo */}
+        {car.imageUrl && !imgError ? (
+          <img
+            src={car.imageUrl}
+            alt={`${car.make} ${car.model}`}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-400"
+            style={{ objectPosition: 'center 60%' }}
+            onError={() => setImgError(true)}
+          />
+        ) : null}
 
         {/* Rank watermark */}
         <div
-          className="absolute right-4 bottom-0 font-black leading-none select-none pointer-events-none"
+          className="rank-wm absolute right-3 bottom-0 font-black leading-none select-none pointer-events-none"
           style={{
             fontFamily: 'var(--font-barlow)',
-            fontSize: '120px',
-            color: 'rgba(255,255,255,0.04)',
+            fontSize: '110px',
+            color: rankWmColor,
             lineHeight: 0.85,
+            zIndex: 1,
           }}
         >
           {RANK_NUM[rank - 1]}
         </div>
 
-        {/* Car emoji — floating */}
-        <div className="a-float relative z-10">
-          <span
-            style={{
-              fontSize: '96px',
-              lineHeight: 1,
-              display: 'block',
-              filter: `drop-shadow(0 12px 40px ${fuelGlow}) drop-shadow(0 4px 10px rgba(0,0,0,0.7))`,
-            }}
-          >
-            {CAR_EMOJI[car.bodyType] || '🚗'}
-          </span>
-        </div>
+        {/* Bottom image fade */}
+        <div
+          className="img-bottom-fade absolute bottom-0 inset-x-0 h-16"
+          style={{ background: imgFade, zIndex: 2 }}
+        />
+
+        {/* Fuel accent bar */}
+        <div
+          className="absolute bottom-0 inset-x-0 h-[2px]"
+          style={{ background: `linear-gradient(to right, transparent, ${fuelAccent}, transparent)`, opacity: 0.7, zIndex: 3 }}
+        />
 
         {/* Best match badge */}
         {isTopPick && (
           <div
-            className="absolute top-3 left-3 z-20 text-black font-bold text-[9px] tracking-[0.15em] uppercase px-3 py-1.5 rounded-full"
-            style={{
-              background: 'var(--orange)',
-              fontFamily: 'var(--font-syne)',
-              boxShadow: '0 4px 12px rgba(255,85,0,0.4)',
-            }}
+            className="absolute top-3 left-3 z-10 text-black font-bold text-[9px] tracking-[0.15em] uppercase px-3 py-1.5 rounded-full"
+            style={{ background: 'var(--orange)', fontFamily: 'var(--font-syne)', boxShadow: '0 4px 12px rgba(255,85,0,0.4)' }}
           >
             ★ Best Match
           </div>
         )}
-
-        {/* Rank badge (non-top) */}
         {!isTopPick && (
           <div
-            className="absolute top-3 left-3 z-20 font-bold text-[9px] tracking-[0.15em] uppercase px-3 py-1.5 rounded-full"
+            className="absolute top-3 left-3 z-10 font-bold text-[9px] tracking-[0.15em] uppercase px-3 py-1.5 rounded-full"
             style={{
               color: 'var(--muted2)',
-              background: 'rgba(255,255,255,0.06)',
+              background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)',
               border: '1px solid var(--border)',
               fontFamily: 'var(--font-syne)',
+              backdropFilter: 'blur(8px)',
             }}
           >
             #{rank} Pick
           </div>
         )}
-
-        {/* Fuel accent bar at bottom */}
-        <div
-          className="absolute bottom-0 inset-x-0 h-[2px]"
-          style={{ background: `linear-gradient(to right, transparent, ${fuelAccent}, transparent)`, opacity: 0.6 }}
-        />
-
-        {/* Fade to card body */}
-        <div
-          className="absolute bottom-0 inset-x-0 h-12"
-          style={{ background: 'linear-gradient(to top, var(--surface), transparent)' }}
-        />
       </div>
 
       {/* ── Body ── */}
       <div className="flex flex-col flex-1 p-5 pt-4">
-
-        {/* Make + model */}
         <div className="mb-4">
           <p className="text-[10px] uppercase tracking-[0.18em] mb-1" style={{ color: 'var(--muted)' }}>
             {car.make}
           </p>
           <div className="flex items-baseline justify-between gap-2">
-            <h3
-              className="font-extrabold text-2xl leading-tight"
-              style={{ fontFamily: 'var(--font-syne)' }}
-            >
+            <h3 className="font-extrabold text-2xl leading-tight" style={{ fontFamily: 'var(--font-syne)', color: 'var(--text)' }}>
               {car.model}
             </h3>
-            <span
-              className="text-sm font-semibold shrink-0"
-              style={{ color: fuelAccent, fontFamily: 'var(--font-syne)' }}
-            >
+            <span className="text-sm font-semibold shrink-0" style={{ color: fuelAccent, fontFamily: 'var(--font-syne)' }}>
               {car.priceLabel}
             </span>
           </div>
@@ -184,11 +185,8 @@ export default function CarCard({ rec, enterClass = '' }: CarCardProps) {
 
         {/* Emotional hook */}
         <div
-          className="rounded-xl px-4 py-3 mb-4 relative overflow-hidden"
-          style={{
-            background: 'rgba(255,255,255,0.03)',
-            borderLeft: `2px solid ${fuelAccent}`,
-          }}
+          className="rounded-xl px-4 py-3 mb-4"
+          style={{ background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)', borderLeft: `2px solid ${fuelAccent}` }}
         >
           <p className="text-xs leading-relaxed italic" style={{ color: 'var(--muted2)' }}>
             &ldquo;{emotionalHook}&rdquo;
@@ -210,14 +208,14 @@ export default function CarCard({ rec, enterClass = '' }: CarCardProps) {
           ))}
         </ul>
 
-        {/* Spec tags */}
+        {/* Spec pills */}
         <div className="flex flex-wrap gap-1.5 mb-5">
           {car.ncapRating > 0 && (
             <span
               className="text-[10px] px-2.5 py-1 rounded-lg font-medium"
               style={{
-                color: NCAP_COLOR[car.ncapRating] || '#52526e',
-                background: `${NCAP_COLOR[car.ncapRating]}15`,
+                color: NCAP_COLOR[car.ncapRating] ?? '#52526e',
+                background: `${NCAP_COLOR[car.ncapRating]}18`,
                 border: `1px solid ${NCAP_COLOR[car.ncapRating]}30`,
               }}
             >
@@ -225,12 +223,12 @@ export default function CarCard({ rec, enterClass = '' }: CarCardProps) {
             </span>
           )}
           {car.mileage > 0 && (
-            <span className="text-[10px] px-2.5 py-1 rounded-lg" style={{ color: 'var(--muted2)', background: 'rgba(255,255,255,0.04)', border: '1px solid var(--border)' }}>
+            <span className="text-[10px] px-2.5 py-1 rounded-lg" style={{ color: 'var(--muted2)', background: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)', border: '1px solid var(--border)' }}>
               {car.mileage} kmpl
             </span>
           )}
           {car.bootSpace > 0 && (
-            <span className="text-[10px] px-2.5 py-1 rounded-lg" style={{ color: 'var(--muted2)', background: 'rgba(255,255,255,0.04)', border: '1px solid var(--border)' }}>
+            <span className="text-[10px] px-2.5 py-1 rounded-lg" style={{ color: 'var(--muted2)', background: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)', border: '1px solid var(--border)' }}>
               {car.bootSpace}L boot
             </span>
           )}
@@ -238,7 +236,7 @@ export default function CarCard({ rec, enterClass = '' }: CarCardProps) {
             className="text-[10px] px-2.5 py-1 rounded-lg font-medium"
             style={{ color: fuelAccent, background: `${fuelAccent}15`, border: `1px solid ${fuelAccent}30` }}
           >
-            {FUEL_LABEL[car.fuelType] || car.fuelType}
+            {FUEL_LABEL[car.fuelType] ?? car.fuelType}
           </span>
         </div>
 
@@ -247,13 +245,8 @@ export default function CarCard({ rec, enterClass = '' }: CarCardProps) {
           href={`https://www.cardekho.com/cars/${car.make.toLowerCase().replace(/\s+/g, '-')}/${car.model.toLowerCase().replace(/\s+/g, '-')}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-auto block w-full py-3 text-center text-xs font-semibold rounded-xl transition-all duration-200 group"
-          style={{
-            border: '1px solid var(--border-strong)',
-            color: 'var(--muted2)',
-            fontFamily: 'var(--font-syne)',
-            letterSpacing: '0.06em',
-          }}
+          className="mt-auto block w-full py-3 text-center text-xs font-semibold rounded-xl transition-all duration-200"
+          style={{ border: '1px solid var(--border-strong)', color: 'var(--muted2)', fontFamily: 'var(--font-syne)', letterSpacing: '0.06em' }}
           onMouseEnter={e => {
             const el = e.currentTarget as HTMLAnchorElement
             el.style.borderColor = fuelAccent

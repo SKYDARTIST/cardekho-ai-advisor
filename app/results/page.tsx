@@ -4,6 +4,7 @@ import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { WizardAnswers, RecommendResponse } from '@/types'
 import CarCard from '@/components/CarCard'
+import ThemeToggle from '@/components/ThemeToggle'
 
 function ResultsContent() {
   const params   = useSearchParams()
@@ -101,19 +102,22 @@ function ResultsContent() {
       {/* NAV */}
       <nav
         className="flex items-center justify-between px-8 md:px-12 py-5 sticky top-0 z-50 backdrop-blur-xl"
-        style={{ borderBottom: '1px solid var(--border)', background: 'rgba(7,7,15,0.85)' }}
+        style={{ borderBottom: '1px solid var(--border)', background: 'var(--nav-bg)' }}
       >
         <div className="font-extrabold text-base flex items-center gap-2.5" style={{ fontFamily: 'var(--font-syne)' }}>
           <span className="w-2 h-2 rounded-full" style={{ background: 'var(--orange)', boxShadow: '0 0 12px var(--orange)' }} />
           Car<span style={{ color: 'var(--orange)' }}>Match</span> AI
         </div>
-        <button
-          onClick={() => router.push('/')}
-          className="text-xs font-medium transition-colors hover:text-white"
-          style={{ color: 'var(--muted)', fontFamily: 'var(--font-syne)' }}
-        >
-          ← New search
-        </button>
+        <div className="flex items-center gap-4">
+          <ThemeToggle />
+          <button
+            onClick={() => router.push('/')}
+            className="text-xs font-medium transition-colors hover:text-white"
+            style={{ color: 'var(--muted)', fontFamily: 'var(--font-syne)' }}
+          >
+            ← New search
+          </button>
+        </div>
       </nav>
 
       {/* HEADER */}
@@ -184,13 +188,18 @@ function ResultsContent() {
           }}
         >
           <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-lg"
+            className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
             style={{
               background: 'var(--orange-dim)',
               border: '1px solid rgba(255,85,0,0.25)',
+              color: 'var(--orange-text)',
             }}
           >
-            🤖
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1a7 7 0 0 1-7 7H9a7 7 0 0 1-7-7H1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
+              <circle cx="9" cy="14" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="15" cy="14" r="1" fill="currentColor" stroke="none"/>
+            </svg>
           </div>
           <div>
             <p

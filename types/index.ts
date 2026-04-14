@@ -26,6 +26,7 @@ export interface CarSpec {
   seatingCapacity: number
   features: string[]
   priceLabel: string
+  imageUrl?: string
 }
 
 export interface CarRecommendation {
