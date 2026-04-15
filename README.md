@@ -4,7 +4,7 @@
 
 **Live:** https://cardekho-ai-advisor.vercel.app  
 **GitHub:** https://github.com/SKYDARTIST/cardekho-ai-advisor  
-**Demo video:** *(link coming)*
+**Demo video:** https://drive.google.com/file/d/1IodwDlJhyv2GFTBcLXDuSt59q3zrzE1S/view?usp=sharing
 
 ---
 
