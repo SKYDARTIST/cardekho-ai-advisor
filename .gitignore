@@ -39,3 +39,20 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# AI session artifacts
+.superpowers/
+docs/superpowers/
+AGENTS.md
+CLAUDE.md
+
+# Screenshots
+*.png
+*.jpg
+*.jpeg
+!public/
+
+# AI tool artifacts
+.claude/
+graphify-out/
+.codex-pet-runs/
