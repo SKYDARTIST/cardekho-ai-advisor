@@ -49,7 +49,7 @@ function ResultsContent() {
 
   const loadingMessages = [
     'Reading your lifestyle...',
-    'Filtering 40+ cars...',
+    'Filtering 40+ local cars...',
     'Writing your shortlist...',
   ]
 
@@ -127,7 +127,7 @@ function ResultsContent() {
               className="text-[10px] uppercase tracking-[0.25em] mb-4"
               style={{ color: 'var(--muted)', fontFamily: 'var(--font-syne)' }}
             >
-              Gemini 2.5 Flash is thinking
+              Demo advisor is matching
             </p>
             <h2
               className="font-black leading-tight mb-2"
@@ -437,13 +437,12 @@ function ResultsContent() {
               How we chose these
             </p>
             <p className="text-sm leading-relaxed" style={{ color: 'var(--muted2)' }}>
-              We filtered{' '}
+              We filter{' '}
               <strong style={{ color: 'var(--text)', fontWeight: 500 }}>40+ Indian cars</strong>{' '}
-              to your budget, then used{' '}
-              <strong style={{ color: 'var(--text)', fontWeight: 500 }}>Gemini 2.5 Flash</strong>{' '}
-              to rank by what matters to <em>you</em> — not just specs. The emotional match on each
-              card was written specifically for your answers.{' '}
-              <span style={{ color: 'var(--orange-text)' }}>Not a generic result.</span>
+              to your budget, then use a deterministic demo scorer to rank by what matters to{' '}
+              <em>you</em> — not just specs. The match reasons are generated from local car data, so
+              this portfolio demo runs without paid AI API calls or exposed keys.{' '}
+              <span style={{ color: 'var(--orange-text)' }}>Transparent and no-cost.</span>
             </p>
           </div>
         </div>

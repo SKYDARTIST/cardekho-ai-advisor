@@ -247,7 +247,7 @@ export default function Home() {
               {[
                 { label: '5★ NCAP',  top: '10%', right: '5%',  color: '#00d68f',           cls: 'chip-in-1' },
                 { label: '27 kmpl',  top: '75%', right: '0%',  color: 'var(--orange-text)', cls: 'chip-in-2' },
-                { label: 'Gemini AI',top: '20%', left: '0%',   color: '#a78bfa',            cls: 'chip-in-3' },
+                { label: 'Demo scorer', top: '20%', left: '0%', color: '#a78bfa',            cls: 'chip-in-3' },
                 { label: '40+ cars', top: '65%', left: '5%',   color: 'var(--muted2)',      cls: 'chip-in-4' },
               ].map(({ label, top, right, left, color, cls }: { label: string; top: string; right?: string; left?: string; color: string; cls: string }) => (
                 <div

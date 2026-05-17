@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getRecommendations } from '@/lib/gemini'
+import { getRecommendations } from '@/lib/recommendations'
 import { WizardAnswers } from '@/types'
 
 // ── Enum validation ──────────────────────────────────────────────────────────
@@ -10,10 +10,10 @@ const VALID: Record<keyof WizardAnswers, readonly string[]> = {
   budget:     ['under8', '8to15', '15to25', 'above25'],
 }
 
-// ── In-memory rate limiter: 3 requests / IP / 60 s ──────────────────────────
-// Note: resets per cold start on Vercel serverless — sufficient for a demo.
+// ── In-memory rate limiter: 30 requests / IP / 60 s ─────────────────────────
+// No paid API is called, but this still protects serverless compute on a demo.
 const rateMap = new Map<string, { count: number; resetAt: number }>()
-const LIMIT      = 3
+const LIMIT      = 30
 const WINDOW_MS  = 60_000
 
 function getIP(req: NextRequest): string {

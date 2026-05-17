@@ -18,6 +18,9 @@
   --muted2: #9090ae;
   --text: #ededff;
   --nav-bg: rgba(7,7,15,0.85);
+  --font-syne: "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-dm: "Inter", "Segoe UI", Arial, sans-serif;
+  --font-barlow: "Arial Narrow", "Avenir Next Condensed", Impact, sans-serif;
 }
 
 body {

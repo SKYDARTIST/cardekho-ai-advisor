@@ -1,6 +1,6 @@
-# CarMatch AI — CarDekho Take-Home Assignment
+# CarMatch AI — CarDekho Advisor Demo
 
-> AI-powered car advisor that maps your lifestyle to the right car. No spec questions. Just 4 honest questions about how you live.
+> Portfolio-grade car advisor that maps your lifestyle to the right car. No spec questions, no paid AI API calls, no visitor cost.
 
 **Live:** https://cardekho-ai-advisor.vercel.app  
 **GitHub:** https://github.com/SKYDARTIST/cardekho-ai-advisor  
@@ -24,12 +24,12 @@
 
 Most car-buying tools ask "what fuel type do you want?" or "how many cc engine?" — questions buyers can't answer without already knowing cars. The result: decision paralysis, filter overwhelm, abandoned sessions.
 
-**The insight:** confused buyers shop with their hearts, not calculators. So instead of asking spec questions, I ask lifestyle questions. The AI maps lifestyle → specs silently. The buyer feels understood, not interrogated.
+**The insight:** confused buyers shop with their hearts, not calculators. So instead of asking spec questions, I ask lifestyle questions. The demo scorer maps lifestyle → specs silently. The buyer feels understood, not interrogated.
 
 ### Core Flow
 
 ```
-Landing → 4-question wizard → AI shortlist (3 cars) → Verdict → "View on CarDekho"
+Landing → 4-question wizard → demo shortlist (3 cars) → Verdict → "View on CarDekho"
 ```
 
 **The 4 questions:**
@@ -40,15 +40,15 @@ Landing → 4-question wizard → AI shortlist (3 cars) → Verdict → "View on
 
 **Results page:**
 - 3 ranked car cards, each with a real car photo and fuel-type themed background
-- Personalised **emotional hook** written by Gemini for the buyer's exact answer combination
+- Personalised **emotional hook** generated from local buyer answers and car data
 - 2–3 factual match reasons with checkmarks
-- **Match score ring** (0–100%) per card — Gemini scores how well each car fits this specific buyer
+- **Match score ring** (0–100%) per card — deterministic scorer ranks how well each car fits this specific buyer
 - **EMI estimate** — auto-calculated from priceMax at 80% loan, 8.5% p.a., 60 months
 - **Buyer count** — social proof showing how many buyers with a similar profile chose this car
 - Spec tags: NCAP rating, mileage, boot space, fuel type
 - Featured user review with star rating per car
-- **The Verdict** — Gemini explains in one sentence why #1 beats #2 for this buyer, plus a 5-year ownership cost comparison across all 3 results
-- AI reasoning strip — transparency on how the shortlist was generated
+- **The Verdict** — one sentence explaining why #1 beats #2 for this buyer, plus a 5-year ownership cost comparison across all 3 results
+- Demo reasoning strip — transparency on how the shortlist was generated without paid API calls
 
 **Supporting features:**
 - Quick Start personas (New parent / Weekend warrior / Smart commuter) — skip the wizard, land directly on results
@@ -79,38 +79,38 @@ Every cut protected the core flow. Adding auth would've killed conversion at the
 | Framework | Next.js 16 App Router | Single repo for UI + API routes, zero-config Vercel deploy |
 | Language | TypeScript | End-to-end type safety from wizard input to API response |
 | Styling | Tailwind v4 + CSS custom properties | PostCSS-only approach, no config file; CSS vars handle dark/light theming cleanly |
-| AI | Gemini 2.5 Flash | Free tier, fast structured JSON output, strong ranking and emotional copy generation |
+| Recommendation engine | Local TypeScript scorer | No API key, no paid inference, deterministic portfolio demo |
 | Data | Static `data/cars.json` (40 cars) | No DB needed — eliminates setup overhead, sufficient for a shortlisting demo |
 | Deploy | Vercel | One push, env vars via dashboard, instant preview URLs |
+| Tests | Vitest | Covers the recommendation behavior that drives the product |
 
 **Fonts:** Barlow Condensed (editorial hero numbers) · Syne (headings, UI labels) · DM Sans (body)
 
 ---
 
-## How Gemini Is Used
+## How Recommendations Work
 
-**Not:** "Here are some cars, write descriptions."
+This repo used to call Gemini from the server route. It now runs in no-cost demo mode so public visitors cannot spend API credits.
 
-**Actually:**
+**Current flow:**
 
-1. Code performs a hard budget filter on the 40-car dataset before touching the API
-2. Filtered cars (full specs) are passed to Gemini in a structured prompt
-3. The prompt includes the buyer's 4 answers and an explicit vibe-to-spec mapping:
+1. Code performs a hard budget filter on the 40-car dataset
+2. `lib/recommendations.ts` scores cars using the buyer's 4 answers and a vibe-to-spec mapping:
    - `safe` → prioritise 5-star NCAP, ground clearance, safety features
    - `sharp` → prioritise turbocharged engines, sporty variants, driver engagement
    - `smart` → prioritise highest mileage, hybrid/EV options, lowest running cost
    - `arrived` → prioritise brand prestige, sunroof, premium audio, tech features
-4. Gemini returns ranked results with: match score, emotional hook, match reasons, and a head-to-head explanation of why #1 beats #2 for this buyer
-5. All responses parsed as strict JSON with markdown fence stripping as a defensive fallback
+3. The API returns ranked results with: match score, emotional hook, match reasons, and a head-to-head explanation of why #1 beats #2 for this buyer
+4. The UI renders the same product experience without `GEMINI_API_KEY`
 
-The emotional hook is the differentiator. A generic tool returns a list. This one returns a sentence that makes you feel seen.
+The emotional hook is still the differentiator. A generic tool returns a list. This one returns a sentence that makes the shortlist feel personal, while staying transparent and free to run.
 
 ---
 
 ## What I Delegated to AI vs. Did Manually
 
 ### Where AI accelerated execution
-- **Gemini prompt architecture** — figuring out the exact JSON schema and vibe-to-spec mapping instructions that make Gemini rank reliably, not randomly
+- **Initial prompt architecture** — helped shape the original ranking schema before the repo moved to no-cost demo mode
 - **CSS variable theming system** — dark/light without React context using CustomEvents is a non-obvious pattern; AI got it right first try
 - **SVG icon components** — replacing every emoji with inline SVG across the entire UI; tedious to write manually, AI generated them cleanly
 - **Review content at scale** — 2 verified-style buyer quotes across all 40 cars
@@ -120,28 +120,30 @@ The emotional hook is the differentiator. A generic tool returns a list. This on
 - Cutting auth, DB, and comparison features to protect the core flow
 - The warm cream light mode (not generic white)
 - The Verdict section concept — the gap between "this matches" and "I want this"
-- Vibe-to-spec mapping logic that drives Gemini's ranking
+- Vibe-to-spec mapping logic that drives recommendation ranking
 - Deciding to cap at 3 results instead of a scrollable list
 
 ### Where AI got in the way
 
-**Gemini hallucinated car IDs.** It would recommend `tata-nexon-ev` when the dataset only had `tata-nexon` — the lookup threw an error and the whole response failed. Had to add strict ID validation (`if (!car) throw new Error(...)`) before the cards could render reliably.
+**Live LLM output was not deterministic enough for a public portfolio demo.** It could hallucinate car IDs or vary the shortlist between runs. The current local scorer only returns cars from `data/cars.json`.
 
 **AI-generated user reviews were uniformly positive and vague.** "Great car, very happy!" reads like fake reviews instantly. Had to manually rewrite several to add credible friction — road noise on highways, tight rear legroom, dealer experience friction — so they felt like real buyers, not marketing copy.
 
 ---
 
-## API Security
+## API Cost and Security
 
-- `GEMINI_API_KEY` is server-side only (no `NEXT_PUBLIC_` prefix, lives only in `lib/gemini.ts` and `.env.local`)
-- In-memory rate limiter: 3 requests / IP / 60 seconds — prevents runaway API costs on a demo
-- Enum validation on all 4 wizard fields before Gemini is ever called — rejects anything outside known values
+- No Gemini/OpenAI key is required for normal demo use
+- No paid generation API is called by visitors
+- In-memory rate limiter: 30 requests / IP / 60 seconds — protects serverless compute on a demo
+- Enum validation on all 4 wizard fields before scoring — rejects anything outside known values
+- See `SECURITY.md` for files and secrets that should stay out of commits
 
 ---
 
 ## If I Had Another 4 Hours
 
-1. **Chain-of-thought prompting** — make Gemini reason about the buyer profile in a hidden scratchpad before writing the emotional hook. A reasoning step would improve specificity and reduce generic copy.
+1. **Explainable scoring panel** — show price, safety, mileage, and practicality points beside each recommendation.
 2. **Share shortlist via URL** — wizard answers are already in query params; just needs an OG image generator so previews look good when shared on WhatsApp.
 3. **EMI configurator** — let the buyer adjust loan tenure and down payment on the card. Most decisions happen at EMI level, not sticker price.
 4. **CarDekho API integration** — swap the static JSON for live pricing and availability. The architecture is already designed for it; `cars.json` is a stand-in.
@@ -155,11 +157,6 @@ The emotional hook is the differentiator. A generic tool returns a list. This on
 git clone https://github.com/SKYDARTIST/cardekho-ai-advisor.git
 cd cardekho-ai-advisor
 npm install
-```
-
-Create `.env.local`:
-```
-GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
 ```bash
@@ -176,8 +173,8 @@ Open [http://localhost:3000](http://localhost:3000).
 cardekho-ai-advisor/
 ├── app/
 │   ├── page.tsx                 # Landing: hero, QuickStart personas, Wizard modal
-│   ├── results/page.tsx         # Results: Gemini fetch, CarCards, Verdict, reasoning strip
-│   ├── api/recommend/route.ts   # POST: rate limit → enum validation → budget filter → Gemini
+│   ├── results/page.tsx         # Results: demo fetch, CarCards, Verdict, reasoning strip
+│   ├── api/recommend/route.ts   # POST: rate limit → enum validation → local scorer
 │   ├── layout.tsx               # Font loading, metadata
 │   └── globals.css              # Tailwind v4, CSS custom properties, light/dark theme vars
 ├── components/
@@ -189,9 +186,26 @@ cardekho-ai-advisor/
 ├── hooks/
 │   └── useTheme.ts              # Theme state via CustomEvent — no React context needed
 ├── lib/
-│   └── gemini.ts                # Gemini client, prompt builder, vibe mapping, JSON parser
+│   └── recommendations.ts       # Local demo scorer, vibe mapping, response builder
 ├── data/
 │   └── cars.json                # 40 Indian cars: specs, pricing, reviews, image URLs
+├── docs/
+│   ├── architecture.md
+│   └── recommendation-methodology.md
+├── specs/
+│   └── 001-demo-recommendation-engine.md
+├── tests/
+│   └── recommendations.test.ts
 └── types/
     └── index.ts                 # WizardAnswers, CarSpec, CarReview, CarRecommendation, RecommendResponse
 ```
+
+## Quality Checks
+
+```bash
+npm run test
+npm run build
+npm run audit:high
+```
+
+`npm run check` runs tests and production build together. CI runs tests, build, and high-severity audit checks on pushes and pull requests.
