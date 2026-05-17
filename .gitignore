@@ -46,11 +46,9 @@ docs/superpowers/
 AGENTS.md
 CLAUDE.md
 
-# Screenshots
-*.png
-*.jpg
-*.jpeg
-!public/
+# Root-level screenshots (use public/screenshots/ instead)
+Screenshot*.png
+Screenshot*.jpg
 
 # AI tool artifacts
 .claude/
